@@ -12,7 +12,7 @@ class _HomeState extends State<Home> {
 //Method
 
   Widget showLogo() {
-    //สร้าง Widget เพื่อนำไปใช้ใน SafeArea
+    //สร้าง Widget เพื่อนำไปใช้ใน SafeArea ะำ
     return Container(
       width: 120.0,
       height: 120.0,
@@ -52,7 +52,8 @@ class _HomeState extends State<Home> {
 
         MaterialPageRoute materialPageRoute =
             MaterialPageRoute(builder: (BuildContext context) => Register());
-        Navigator.of(context).push(materialPageRoute);//การสร้าง Route เพื่อเปิดหน้าใหม่
+        Navigator.of(context)
+            .push(materialPageRoute); //การสร้าง Route เพื่อเปิดหน้าใหม่
       },
     );
   }
