@@ -12,7 +12,7 @@ class _HomeState extends State<Home> {
 //Method
 
   Widget showLogo() {
-    //สร้าง Widget เพื่อนำไปใช้ใน SafeArea ะำ
+    //สร้าง Widget เพื่อนำไปใช้ใน SafeArea
     return Container(
       width: 120.0,
       height: 120.0,
