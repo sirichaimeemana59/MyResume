@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:http/http.dart' as http;
+//import 'package:http/http.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -25,7 +26,7 @@ class _RegisterState extends State<Register> {
           if (formKey.currentState.validate()) {
             formKey.currentState.save();
             //print('name= $nameString, lname= $lnameString, phone= $phoneString,dob= $dobString, password= $passwordString');
-           // registerThread();
+            // registerThread();
           }
         });
   }

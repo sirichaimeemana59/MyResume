@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/user/user.dart';
+//import 'dart:convert' as convert;
 
 import 'register.dart';
 //import 'package:flutter/services.dart';
@@ -58,6 +60,18 @@ class _HomeState extends State<Home> {
     );
   }
 
+  Widget apiTestButton() {
+    return IconButton(
+      icon: Icon(Icons.cloud_upload),
+      onPressed: () {
+        MaterialPageRoute materialPageRoute =
+            MaterialPageRoute(builder: (BuildContext context) => UserList());
+        Navigator.of(context)
+            .push(materialPageRoute); //การสร้าง Route เพื่อเปิดหน้าใหม่
+      },
+    );
+  }
+
   Widget showButton() {
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -66,7 +80,11 @@ class _HomeState extends State<Home> {
         SizedBox(
           width: 8.0,
         ),
-        registerButton()
+        registerButton(),
+        SizedBox(
+          width: 8.0,
+        ),
+        apiTestButton()
       ],
     );
   }
@@ -78,14 +96,26 @@ class _HomeState extends State<Home> {
       body: SafeArea(
           //SafeArea เก็บวัตถุได้เพียง 1 ตัว และมีค่าเป็น child
           //child: showAppName(),
+          // child: FutureBuilder<UserModel>(
+          //   future: getUser(),
+          //   builder: (context, snapshot) {
+          //     if (snapshot.hasData) {
+          //       // final user = snapshot.data;
 
+          //       return Text("Name");
+          //     } else if (snapshot.hasError) {
+          //       return Text(snapshot.error.toString());
+          //     }
+          //     return CircularProgressIndicator();
+          //   },
+          // ),
           //     //User Column เรียงวัตถุจากบนลงล่าง
           child: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
                 colors: [Colors.white, Colors.yellow.shade600], radius: 1.0)),
         child: Center(
-          //set วัตถุให้อยู่กึ่งกลาง
+          //     //set วัตถุให้อยู่กึ่งกลาง
           child: Column(
             mainAxisSize: MainAxisSize.min, //ปรับวัตถให้อยู่กึ่งกลางหน้าจอ
             children: [
@@ -97,13 +127,13 @@ class _HomeState extends State<Home> {
               SizedBox(
                 height: 8.0,
               ),
-              showButton()
+              showButton(),
             ],
           ),
         ),
       )),
       // end Column
-      // User row เรียงวัตถุจาซ้ายไปขวา
+      //User row เรียงวัตถุจาซ้ายไปขวา
       //     child: Row(
       //   children: [showAppName(), showAppName(), showAppName(), showAppName()],
       // )),
