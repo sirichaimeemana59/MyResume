@@ -1,15 +1,33 @@
 import 'package:flutter/material.dart';
-//import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:http/http.dart' as http;
-//import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+import 'package:my_app/cleass_model/userModel.dart';
 
 class Register extends StatefulWidget {
   @override
   _RegisterState createState() => _RegisterState();
 }
 
+// ignore: missing_return
+Future<UserModel> createUser(
+    //สร้าง Future เพื่อเรียก UserModel และส่งไปสรเาง User
+    String name,
+    String email,
+    String password) async {
+  //final String apiCreateUser = "http://127.0.0.1:8000/user_create_user";
+
+  var response = await http.post(
+      Uri.http('127.0.0.1:8000', '/user_create_user'),
+      body: {"name": name, "email": email, "password": password});
+  if (response.statusCode == 200) {
+    print('success');
+  } else {
+    print('Error');
+  }
+}
+
 class _RegisterState extends State<Register> {
   //Explict ตัวแปร
+  //UserModel _user;
   final formKey = GlobalKey<FormState>(); //Validate form
   String nameString,
       lnameString,
@@ -21,12 +39,19 @@ class _RegisterState extends State<Register> {
   Widget registerButton() {
     return IconButton(
         icon: Icon(Icons.cloud_upload),
-        onPressed: () {
+        onPressed: () async {
           //print('You Click save');
           if (formKey.currentState.validate()) {
             formKey.currentState.save();
+            final String name = nameString;
+            final String email = emailString;
+            final String password = passwordString;
             //print('name= $nameString, lname= $lnameString, phone= $phoneString,dob= $dobString, password= $passwordString');
-            // registerThread();
+            createUser(name, email, password);
+
+            // setState(() {
+            //   _user = user;
+            // });
           }
         });
   }

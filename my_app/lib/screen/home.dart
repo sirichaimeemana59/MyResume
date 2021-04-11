@@ -112,17 +112,14 @@ class _HomeState extends State<Home> {
           //     //User Column เรียงวัตถุจากบนลงล่าง
           child: Container(
         decoration: BoxDecoration(
-            gradient: RadialGradient(
-                colors: [Colors.white, Colors.yellow.shade600], radius: 1.0)),
+            image: DecorationImage(
+          image: AssetImage('images/resume.png'),
+        )),
         child: Center(
           //     //set วัตถุให้อยู่กึ่งกลาง
           child: Column(
             mainAxisSize: MainAxisSize.min, //ปรับวัตถให้อยู่กึ่งกลางหน้าจอ
             children: [
-              showLogo(),
-              SizedBox(
-                height: 8.0,
-              ),
               showAppName(),
               SizedBox(
                 height: 8.0,
