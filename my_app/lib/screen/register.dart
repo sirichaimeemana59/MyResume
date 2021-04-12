@@ -7,6 +7,56 @@ class Register extends StatefulWidget {
   _RegisterState createState() => _RegisterState();
 }
 
+//Widget popup
+Widget contentPopup() {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text('Popup Menu Example - FlutterCorner'),
+      backgroundColor: Colors.black,
+    ),
+    body: Center(
+      child: RaisedButton(
+        child: Text(
+          'Show Pop-up',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        color: Colors.black,
+        onPressed: () {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) => _buildPopupDialog(context),
+          );
+        },
+      ),
+    ),
+  );
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    title: const Text('Popup example'),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: <Widget>[
+        Text("Hello"),
+      ],
+    ),
+    actions: <Widget>[
+      new FlatButton(
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
+        textColor: Theme.of(context).primaryColor,
+        child: const Text('Close'),
+      ),
+    ],
+  );
+}
+//End Widget popup
+
 // ignore: missing_return
 Future<UserModel> createUser(
     //สร้าง Future เพื่อเรียก UserModel และส่งไปสรเาง User
@@ -20,6 +70,7 @@ Future<UserModel> createUser(
       body: {"name": name, "email": email, "password": password});
   if (response.statusCode == 200) {
     print('success');
+    contentPopup();
   } else {
     print('Error');
   }
