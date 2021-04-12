@@ -113,7 +113,7 @@ class _HomeState extends State<Home> {
           child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('images/resume.png'),
+          image: AssetImage('images/background.png'),
         )),
         child: Center(
           //     //set วัตถุให้อยู่กึ่งกลาง
