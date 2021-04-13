@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/user/login.dart';
 import 'package:my_app/user/user.dart';
 //import 'dart:convert' as convert;
 
@@ -40,7 +41,12 @@ class _HomeState extends State<Home> {
     return RaisedButton(
       color: Colors.blue.shade800,
       child: Text('Sign In', style: TextStyle(color: Colors.white)),
-      onPressed: () {},
+      onPressed: () {
+        MaterialPageRoute materialPageRoute =
+            MaterialPageRoute(builder: (BuildContext context) => LoginForm());
+        Navigator.of(context)
+            .push(materialPageRoute); //การสร้าง Route เพื่อเปิดหน้าใหม่
+      },
     );
   }
 
@@ -84,7 +90,7 @@ class _HomeState extends State<Home> {
         SizedBox(
           width: 8.0,
         ),
-        apiTestButton()
+        //apiTestButton()
       ],
     );
   }
@@ -121,6 +127,9 @@ class _HomeState extends State<Home> {
           child: Column(
             mainAxisSize: MainAxisSize.min, //ปรับวัตถให้อยู่กึ่งกลางหน้าจอ
             children: [
+              SizedBox(
+                height: 450.0,
+              ),
               showAppName(),
               SizedBox(
                 height: 8.0,
