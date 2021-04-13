@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:my_app/cleass_model/loginModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/pets/petList.dart';
 import 'package:my_app/screen/home.dart';
-import 'package:my_app/user/loginSuccess.dart';
+//import 'package:my_app/user/loginSuccess.dart';
 
 class LoginForm extends StatefulWidget {
   @override
@@ -14,6 +15,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final formKey = GlobalKey<FormState>();
   String emailString, passwordString;
+  //Text Input
   Widget emailText() {
     return TextFormField(
       decoration: InputDecoration(
@@ -151,7 +153,7 @@ class _LoginFormState extends State<LoginForm> {
                 child: Text('OK'),
                 onPressed: () {
                   MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                      builder: (BuildContext context) => LoginSuccess());
+                      builder: (BuildContext context) => PetControler());
                   Navigator.of(context).push(materialPageRoute);
                 },
               )
@@ -161,7 +163,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 //End Popup
 
-//Popup Login Success
+//Popup Login Error
   loginErrorAlertDialog(BuildContext context) {
     //popupRegisterController registerController = popupRegisterController();
     return showDialog(
