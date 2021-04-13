@@ -62,7 +62,7 @@ class _LoginFormState extends State<LoginForm> {
       color: Colors.blue.shade900,
       child: Text('Login', style: TextStyle(color: Colors.white)),
       onPressed: () async {
-        print('You Click');
+        //print('You Click');
         if (formKey.currentState.validate()) {
           formKey.currentState.save();
           final String email = emailString;
@@ -88,9 +88,12 @@ class _LoginFormState extends State<LoginForm> {
     var response = await http.post(
         Uri.http('127.0.0.1:8000', '/mobile_user_login'),
         body: {"email": email, "password": password});
-    print(response.body);
-    var status = json.decode(response.body);
-    if (status == '1') {
+
+    var status = json.decode(response.body)['status'];
+    //var users = json.decode(response.body)['user'];
+
+   // print(response.statusCode);
+    if (status == 1) {
       // print('success');
       loginAlertDialog(context);
     } else {
