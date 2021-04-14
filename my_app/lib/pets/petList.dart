@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/cleass_model/petsModel.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_app/pets/editPets.dart';
 //import 'package:image_cropper/image_cropper.dart';
 
 class PetControler extends StatefulWidget {
@@ -14,11 +15,22 @@ class PetControler extends StatefulWidget {
   _PetControlerState createState() => _PetControlerState();
 }
 
+//Class todo return data to anther page
+class Todo {
+  final String name;
+  final String age;
+  final String photo;
+  final String note;
+  Todo(this.name, this.age, this.note, this.photo);
+}
+//End Class
+
 class _PetControlerState extends State<PetControler> {
 //Create valiable and form validate
   final formKey = GlobalKey<FormState>();
   String nameString, ageString, noteString, photoString;
   List pets = []; //สร้างไว้เพื่อรับข้อมูลรายการสัตว์
+  List petsDetail = [];
   bool isLoading = false;
 
   //File
@@ -60,6 +72,7 @@ class _PetControlerState extends State<PetControler> {
     var age = item['age'];
     var photo = item['photo'];
     var note = item['note'];
+    var id = item['id_pet'];
     return Card(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -104,6 +117,19 @@ class _PetControlerState extends State<PetControler> {
                     SizedBox(
                       width: MediaQuery.of(context).size.width - 140,
                       child: Text("Note : " + note),
+                    ),
+                    ButtonBar(
+                      children: [
+                        // ignore: deprecated_member_use
+                        FlatButton(
+                            child: Text('Edit'),
+                            onPressed: () {
+                              //print(id);
+                              fetchPetsDetail(id);
+                            }),
+                        // ignore: deprecated_member_use
+                        FlatButton(child: Text('Delete'), onPressed: () {})
+                      ],
                     )
                   ],
                 ),
@@ -435,4 +461,34 @@ class _PetControlerState extends State<PetControler> {
   }
 
   //End fetch
+
+  //API Get data detail pets and fetch
+  fetchPetsDetail(id) async {
+    String _id = id.toString();
+    //print(id);
+    // String _id = id;
+    var response = await http
+        .get(Uri.http('127.0.0.1:8000', '/user_get_detail_pets/' + '$_id'));
+    if (response.statusCode == 200) {
+      var itemsPets = json.decode(response.body);
+      print(itemsPets);
+      setState(() {
+        //petsDetail = itemsPets;
+      });
+
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => EditPetsForm());
+      Navigator.of(context).push(materialPageRoute);
+
+      //var id = null;
+    } else {
+      setState(() {
+        petsDetail = [];
+      });
+    }
+    //print(userAccountFromJson(response.body));
+  }
+
+  //End fetch
+
 }
