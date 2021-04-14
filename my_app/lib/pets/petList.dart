@@ -125,9 +125,21 @@ class _PetControlerState extends State<PetControler> {
                         // ignore: deprecated_member_use
                         FlatButton(
                             child: Text('Edit'),
-                            onPressed: () {
-                              //print(id);
-                              fetchPetsDetail(id);
+                            onPressed: () async {
+                              String _id = id.toString();
+                              var response = await http.get(Uri.http(
+                                  '127.0.0.1:8000',
+                                  '/user_get_detail_pets/' + '$_id'));
+                              var itemsPets =
+                                  json.decode(response.body)['data'];
+                              print(itemsPets);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => EditPetsForm(),
+                                      settings: RouteSettings(
+                                        arguments: [itemsPets[index]],
+                                      )));
                             }),
                         // ignore: deprecated_member_use
                         FlatButton(
