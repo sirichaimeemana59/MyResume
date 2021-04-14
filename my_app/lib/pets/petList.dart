@@ -35,6 +35,8 @@ class _PetControlerState extends State<PetControler> {
 
   //File
   File file;
+
+  get index => null;
   //dynamic _pickImageError;
   //bool isVideo = false;
   //final ImagePicker _picker = ImagePicker();
@@ -128,7 +130,11 @@ class _PetControlerState extends State<PetControler> {
                               fetchPetsDetail(id);
                             }),
                         // ignore: deprecated_member_use
-                        FlatButton(child: Text('Delete'), onPressed: () {})
+                        FlatButton(
+                            child: Text('Delete'),
+                            onPressed: () {
+                              deletePetsDetail(id);
+                            })
                       ],
                     )
                   ],
@@ -470,17 +476,39 @@ class _PetControlerState extends State<PetControler> {
     var response = await http
         .get(Uri.http('127.0.0.1:8000', '/user_get_detail_pets/' + '$_id'));
     if (response.statusCode == 200) {
-      var itemsPets = json.decode(response.body);
-      print(itemsPets);
+      var itemsPets = json.decode(response.body)['data'];
+
+      //print(itemsPets.name);
       setState(() {
         //petsDetail = itemsPets;
       });
 
-      MaterialPageRoute materialPageRoute =
-          MaterialPageRoute(builder: (BuildContext context) => EditPetsForm());
+      MaterialPageRoute materialPageRoute = MaterialPageRoute(
+          builder: (BuildContext context) => EditPetsForm(),
+          settings: RouteSettings(arguments: itemsPets[context]));
       Navigator.of(context).push(materialPageRoute);
 
       //var id = null;
+    } else {
+      setState(() {
+        petsDetail = [];
+      });
+    }
+    //print(userAccountFromJson(response.body));
+  }
+
+  //End fetch
+  //API delete data detail pets
+  deletePetsDetail(id) async {
+    String _id = id.toString();
+    //print(id);
+    // String _id = id;
+    var response = await http
+        .get(Uri.http('127.0.0.1:8000', '/user_delete_detail_pets/' + '$_id'));
+    if (response.statusCode == 200) {
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => PetControler());
+      Navigator.of(context).push(materialPageRoute);
     } else {
       setState(() {
         petsDetail = [];
