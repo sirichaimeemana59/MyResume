@@ -1,9 +1,13 @@
 import 'dart:convert';
+import 'dart:async';
+import 'dart:io';
 //import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/cleass_model/petsModel.dart';
+import 'package:image_picker/image_picker.dart';
+//import 'package:image_cropper/image_cropper.dart';
 
 class PetControler extends StatefulWidget {
   @override
@@ -18,7 +22,10 @@ class _PetControlerState extends State<PetControler> {
   bool isLoading = false;
 
   //File
-  //File _image;
+  File file;
+  //dynamic _pickImageError;
+  //bool isVideo = false;
+  //final ImagePicker _picker = ImagePicker();
   //Endfile
   void initState() {
     //Get State
@@ -63,8 +70,16 @@ class _PetControlerState extends State<PetControler> {
                 width: 60,
                 height: 60,
                 decoration: BoxDecoration(
-                    color: Colors.blue.shade400,
-                    borderRadius: BorderRadius.circular(60 / 2)),
+                    //color: Colors.blue.shade400,
+                    //image: DecorationImage(image: photo),
+                    borderRadius: BorderRadius.circular(60 / 2),
+                    // ignore: missing_required_param
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: AssetImage('images/dog.png'),
+                      //image: NetworkImage(
+                      //'https://pupuphooray.com/wp-content/uploads/2019/03/dog-icon.png'),
+                    )),
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
@@ -138,6 +153,8 @@ class _PetControlerState extends State<PetControler> {
                   children: [
                     nameText(),
                     ageText(),
+                    //cameraButton(),
+                    //galleryButton(),
                     photoText(),
                     noteText(),
                   ],
@@ -225,10 +242,97 @@ class _PetControlerState extends State<PetControler> {
     );
   }
 
+//Brow image
+  Widget cameraButton() {
+    return IconButton(
+        icon: Icon(
+          Icons.photo_camera,
+          size: 36.0,
+          color: Colors.blue.shade600,
+        ),
+        onPressed: () {
+          chooseImage(ImageSource.camera);
+        });
+  }
+
+//End Brow image
+//Brow image gallery
+  Widget galleryButton() {
+    return IconButton(
+        icon: Icon(
+          Icons.photo_album,
+          size: 36.0,
+          color: Colors.blue.shade600,
+        ),
+        onPressed: () {
+          print('object');
+          chooseImage(ImageSource.gallery);
+        });
+  }
+
+  Future chooseImage(ImageSource imageSource) async {
+    try {
+      // ignore: invalid_use_of_visible_for_testing_member
+      // var object = await ImagePicker.pickImage(
+      //   source: imageSource,
+      //   maxWidth: 800.0,
+      //   maxHeight: 800.0,
+      // );
+      setState(() {
+        //file = object;
+      });
+    } catch (e) {}
+  }
+
+//End Brow image
+//Input file
+  Widget uploadButton() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width,
+          // ignore: deprecated_member_use
+          child: RaisedButton.icon(
+              color: Colors.blue.shade600,
+              onPressed: () {
+                print('you click me');
+                if (file == null) {
+                  showAlertImage(
+                      'Non Choose Photo Pets', 'Please select photo');
+                }
+              },
+              icon: Icon(Icons.photo_camera),
+              label: Text('Upload Image')),
+        )
+      ],
+    );
+  }
+
+  Future showAlertImage(String title, String meeage) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(meeage),
+            actions: [
+              // ignore: deprecated_member_use
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text('OK'))
+            ],
+          );
+        });
+  }
+
+//End input file
   Widget photoText() {
     return TextFormField(
       decoration: InputDecoration(
-        icon: Icon(Icons.image, color: Colors.blue.shade800),
+        icon: Icon(Icons.photo_camera, color: Colors.blue.shade800),
         labelText: 'Displays Photo',
         labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         helperText: 'Please input your Photo pets',
@@ -318,7 +422,7 @@ class _PetControlerState extends State<PetControler> {
     var response = await http.get(Uri.http('127.0.0.1:8000', '/user_lit_pets'));
     if (response.statusCode == 200) {
       var items = json.decode(response.body);
-      print(items);
+      //print(items);
       setState(() {
         pets = items;
       });
