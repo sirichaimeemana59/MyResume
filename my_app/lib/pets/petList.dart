@@ -28,6 +28,7 @@ class Todo {
 class _PetControlerState extends State<PetControler> {
 //Create valiable and form validate
   final formKey = GlobalKey<FormState>();
+
   String nameString, ageString, noteString, photoString;
   List pets = []; //สร้างไว้เพื่อรับข้อมูลรายการสัตว์
   List petsDetail = [];
@@ -127,19 +128,18 @@ class _PetControlerState extends State<PetControler> {
                             child: Text('Edit'),
                             onPressed: () async {
                               String _id = id.toString();
-                              var response = await http.get(Uri.http(
-                                  '127.0.0.1:8000',
-                                  '/user_get_detail_pets/' + '$_id'));
-                              var itemsPets =
-                                  json.decode(response.body)['data'];
-                              print(itemsPets);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => EditPetsForm(),
-                                      settings: RouteSettings(
-                                        arguments: [itemsPets[index]],
-                                      )));
+                              //var response = await http.get(Uri.http(
+                              //'127.0.0.1:8000',
+                              //'/user_get_detail_pets/' + '$_id'));
+                              //var name = 'toet';
+
+                              //var itemsPets =
+                              //json.decode(response.body)['data'];
+                              //print(itemsPets['name']);
+                              var materialPageRoute = MaterialPageRoute(
+                                  builder: (context) => EditPetsForm(),
+                                  settings: RouteSettings(arguments: _id));
+                              Navigator.push(context, materialPageRoute);
                             }),
                         // ignore: deprecated_member_use
                         FlatButton(
