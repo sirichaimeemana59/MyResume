@@ -6,7 +6,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/cleass_model/petsModel.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:my_app/pets/editPets.dart';
 //import 'package:image_cropper/image_cropper.dart';
 
@@ -33,6 +32,8 @@ class _PetControlerState extends State<PetControler> {
   List pets = []; //สร้างไว้เพื่อรับข้อมูลรายการสัตว์
   List petsDetail = [];
   bool isLoading = false;
+  bool disposed = false;
+  DateTime time = DateTime.now();
 
   //File
   File file;
@@ -286,92 +287,6 @@ class _PetControlerState extends State<PetControler> {
     );
   }
 
-//Brow image
-  Widget cameraButton() {
-    return IconButton(
-        icon: Icon(
-          Icons.photo_camera,
-          size: 36.0,
-          color: Colors.blue.shade600,
-        ),
-        onPressed: () {
-          chooseImage(ImageSource.camera);
-        });
-  }
-
-//End Brow image
-//Brow image gallery
-  Widget galleryButton() {
-    return IconButton(
-        icon: Icon(
-          Icons.photo_album,
-          size: 36.0,
-          color: Colors.blue.shade600,
-        ),
-        onPressed: () {
-          print('object');
-          chooseImage(ImageSource.gallery);
-        });
-  }
-
-  Future chooseImage(ImageSource imageSource) async {
-    try {
-      // ignore: invalid_use_of_visible_for_testing_member
-      // var object = await ImagePicker.pickImage(
-      //   source: imageSource,
-      //   maxWidth: 800.0,
-      //   maxHeight: 800.0,
-      // );
-      setState(() {
-        //file = object;
-      });
-    } catch (e) {}
-  }
-
-//End Brow image
-//Input file
-  Widget uploadButton() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          // ignore: deprecated_member_use
-          child: RaisedButton.icon(
-              color: Colors.blue.shade600,
-              onPressed: () {
-                print('you click me');
-                if (file == null) {
-                  showAlertImage(
-                      'Non Choose Photo Pets', 'Please select photo');
-                }
-              },
-              icon: Icon(Icons.photo_camera),
-              label: Text('Upload Image')),
-        )
-      ],
-    );
-  }
-
-  Future showAlertImage(String title, String meeage) async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(meeage),
-            actions: [
-              // ignore: deprecated_member_use
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
-  }
-
 //End input file
   Widget photoText() {
     return TextFormField(
@@ -467,44 +382,15 @@ class _PetControlerState extends State<PetControler> {
     if (response.statusCode == 200) {
       var items = json.decode(response.body);
       //print(items);
-      setState(() {
-        pets = items;
-      });
+      if (mounted)
+        setState(() {
+          pets = items;
+        });
     } else {
-      setState(() {
-        pets = [];
-      });
-    }
-    //print(userAccountFromJson(response.body));
-  }
-
-  //End fetch
-
-  //API Get data detail pets and fetch
-  fetchPetsDetail(id) async {
-    String _id = id.toString();
-    //print(id);
-    // String _id = id;
-    var response = await http
-        .get(Uri.http('127.0.0.1:8000', '/user_get_detail_pets/' + '$_id'));
-    if (response.statusCode == 200) {
-      var itemsPets = json.decode(response.body)['data'];
-
-      //print(itemsPets.name);
-      setState(() {
-        //petsDetail = itemsPets;
-      });
-
-      MaterialPageRoute materialPageRoute = MaterialPageRoute(
-          builder: (BuildContext context) => EditPetsForm(),
-          settings: RouteSettings(arguments: itemsPets[context]));
-      Navigator.of(context).push(materialPageRoute);
-
-      //var id = null;
-    } else {
-      setState(() {
-        petsDetail = [];
-      });
+      if (mounted)
+        setState(() {
+          pets = [];
+        });
     }
     //print(userAccountFromJson(response.body));
   }
@@ -521,11 +407,7 @@ class _PetControlerState extends State<PetControler> {
       MaterialPageRoute materialPageRoute =
           MaterialPageRoute(builder: (BuildContext context) => PetControler());
       Navigator.of(context).push(materialPageRoute);
-    } else {
-      setState(() {
-        petsDetail = [];
-      });
-    }
+    } else {}
     //print(userAccountFromJson(response.body));
   }
 

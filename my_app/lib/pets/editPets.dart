@@ -3,7 +3,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:my_app/cleass_model/PetEdit.dart';
+import 'package:my_app/pets/petList.dart';
+//import 'package:image_picker/image_picker.dart';
 //import 'petList.dart';
 
 class EditPetsForm extends StatefulWidget {
@@ -15,17 +17,10 @@ class EditPetsForm extends StatefulWidget {
 
 class _EditPetsFormState extends State<EditPetsForm> {
   final formKey = GlobalKey<FormState>();
-  // ignore: avoid_init_to_null
-  String nameString = null,
-      // ignore: avoid_init_to_null
-      ageString = null,
-      // ignore: avoid_init_to_null
-      noteString = null,
-      // ignore: avoid_init_to_null
-      photoString = null;
+  String nameString, ageString, noteString, photoString;
+  String nameData, ageData, noteData, photoData, idData;
   File file;
 
-  List petsDetail = [];
   bool isLoading = false;
   void initState() {
     //Get State
@@ -42,31 +37,34 @@ class _EditPetsFormState extends State<EditPetsForm> {
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade600,
         title: Text('Pet Family'),
+        actions: [
+          submitButton(),
+        ],
       ),
       body: showForm(),
     );
   }
 
-  Widget getbody() {
-    return ListView.builder(
-        itemCount: petsDetail.length,
-        itemBuilder: (context, index) {
-          return getListForm(petsDetail[index]);
-        });
-  }
+  //Widget getbody() {
+  //return ListView.builder(
+  // itemCount: petsDetail.length,
+  //itemBuilder: (context, index) {
+  // return getListForm(petsDetail[index]);
+  //});
+  //}
 
   // ignore: missing_return
-  Widget getListForm(item) {
-    var name = item['name'];
-    var age = item['age'];
-    var photo = item['photo'];
-    var note = item['note'];
-    //var id = item['id_pet'];
-    nameString = name;
-    ageString = age;
-    photoString = photo;
-    noteString = note;
-  }
+  //Widget getListForm(item) {
+  //var name = item['name'];
+  //var age = item['age'];
+  //var photo = item['photo'];
+  //var note = item['note'];
+  //var id = item['id_pet'];
+  //nameString = name;
+  //ageString = age;
+  //photoString = photo;
+  //noteString = note;
+  //}
 
   //API Get data detail pets and fetch
   fetchPetsDetail(todo) async {
@@ -77,27 +75,38 @@ class _EditPetsFormState extends State<EditPetsForm> {
     if (response.statusCode == 200) {
       var itemsPets = json.decode(response.body)['data'];
 
-      //print(itemsPets);
-      setState(() {
-        petsDetail = itemsPets;
-      });
+      //print(itemsPets['id_pet']);
+      if (mounted)
+        setState(() {
+          nameData = itemsPets['name'];
+          ageData = itemsPets['age'];
+          photoData = itemsPets['photo'];
+          noteData = itemsPets['note'];
+          idData = itemsPets['id_pet'].toString();
+        });
       //var id = null;
     } else {
-      setState(() {
-        petsDetail = [];
-      });
+      if (mounted)
+        setState(() {
+          nameData = '';
+          ageData = '';
+          photoData = '';
+          noteData = '';
+          idData = '';
+        });
     }
     //print(userAccountFromJson(response.body));
   }
 
   //End fetch
-
-  //Widget Input form
-  Widget nameText(name) {
+//Widget Input form
+  Widget nameText() {
     return TextFormField(
+      controller: TextEditingController(text: nameData),
       decoration: InputDecoration(
         icon: Icon(Icons.pets, color: Colors.blue.shade800),
         labelText: 'Displays Name',
+        //hintText: nameData,
         labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         helperText: 'Please input your name pets',
       ),
@@ -114,11 +123,13 @@ class _EditPetsFormState extends State<EditPetsForm> {
     );
   }
 
-  Widget ageText(age) {
+  Widget ageText() {
     return TextFormField(
+      controller: TextEditingController(text: ageData),
       decoration: InputDecoration(
         icon: Icon(Icons.calendar_today, color: Colors.blue.shade800),
-        labelText: age,
+        labelText: 'Displays Age',
+        //hintText: ageData,
         labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         helperText: 'Please input your age pets',
       ),
@@ -135,98 +146,13 @@ class _EditPetsFormState extends State<EditPetsForm> {
     );
   }
 
-//Brow image
-  Widget cameraButton() {
-    return IconButton(
-        icon: Icon(
-          Icons.photo_camera,
-          size: 36.0,
-          color: Colors.blue.shade600,
-        ),
-        onPressed: () {
-          chooseImage(ImageSource.camera);
-        });
-  }
-
-//End Brow image
-//Brow image gallery
-  Widget galleryButton() {
-    return IconButton(
-        icon: Icon(
-          Icons.photo_album,
-          size: 36.0,
-          color: Colors.blue.shade600,
-        ),
-        onPressed: () {
-          print('object');
-          chooseImage(ImageSource.gallery);
-        });
-  }
-
-  Future chooseImage(ImageSource imageSource) async {
-    try {
-      // ignore: invalid_use_of_visible_for_testing_member
-      // var object = await ImagePicker.pickImage(
-      //   source: imageSource,
-      //   maxWidth: 800.0,
-      //   maxHeight: 800.0,
-      // );
-      setState(() {
-        //file = object;
-      });
-    } catch (e) {}
-  }
-
-//End Brow image
-//Input file
-  Widget uploadButton() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width,
-          // ignore: deprecated_member_use
-          child: RaisedButton.icon(
-              color: Colors.blue.shade600,
-              onPressed: () {
-                print('you click me');
-                if (file == null) {
-                  showAlertImage(
-                      'Non Choose Photo Pets', 'Please select photo');
-                }
-              },
-              icon: Icon(Icons.photo_camera),
-              label: Text('Upload Image')),
-        )
-      ],
-    );
-  }
-
-  Future showAlertImage(String title, String meeage) async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text(title),
-            content: Text(meeage),
-            actions: [
-              // ignore: deprecated_member_use
-              FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text('OK'))
-            ],
-          );
-        });
-  }
-
-//End input file
-  Widget photoText(photo) {
+  Widget photoText() {
     return TextFormField(
+      controller: TextEditingController(text: photoData),
       decoration: InputDecoration(
         icon: Icon(Icons.photo_camera, color: Colors.blue.shade800),
         labelText: 'Displays Photo',
+        //hintText: photoData,
         labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         helperText: 'Please input your Photo pets',
       ),
@@ -243,11 +169,13 @@ class _EditPetsFormState extends State<EditPetsForm> {
     );
   }
 
-  Widget noteText(note) {
+  Widget noteText() {
     return TextFormField(
+      controller: TextEditingController(text: noteData),
       decoration: InputDecoration(
         icon: Icon(Icons.note, color: Colors.blue.shade800),
         labelText: 'Displays Note',
+        //hintText: noteData,
         labelStyle: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
         helperText: 'Please input your Note pets',
       ),
@@ -273,13 +201,63 @@ class _EditPetsFormState extends State<EditPetsForm> {
             child: ListView(
               padding: EdgeInsets.all(30.0),
               children: [
-                nameText(nameString),
-                ageText(ageString),
-                photoText(photoString),
-                noteText(noteString),
+                nameText(),
+                ageText(),
+                photoText(),
+                noteText(),
               ],
             ),
           )),
     );
+  }
+
+//Button Save
+  Widget submitButton() {
+    return IconButton(
+        icon: Icon(Icons.pets),
+        onPressed: () async {
+          print('Click Me');
+          if (formKey.currentState.validate()) {
+            formKey.currentState.save();
+            final String name = nameString;
+            final String age = ageString;
+            final String photo = photoString;
+            final String note = noteString;
+            final String id = idData;
+            //print('name= $name, age= $age, photo= $photo,note= $note,id=$id');
+            updatePets(name, age, photo, note, id);
+          }
+        });
+  }
+
+  //API Update pets
+  // ignore: missing_return
+  Future<PestEditModel> updatePets(
+      //สร้าง Future เพื่อเรียก UserModel และส่งไปสรเาง User
+      String name,
+      String age,
+      String photo,
+      note,
+      id) async {
+    //final String apiCreateUser = "http://127.0.0.1:8000/user_create_user";
+
+    var response = await http
+        .post(Uri.http('127.0.0.1:8000', '/user_update_pets'), body: {
+      "name": name,
+      "age": age,
+      "photo": photo,
+      "note": note,
+      "id": id
+    });
+    if (response.statusCode == 200) {
+      print('success');
+      //contentPopup();
+      //createAlertDialog(context);
+      MaterialPageRoute materialPageRoute =
+          MaterialPageRoute(builder: (BuildContext context) => PetControler());
+      Navigator.of(context).push(materialPageRoute);
+    } else {
+      print('Error');
+    }
   }
 }
