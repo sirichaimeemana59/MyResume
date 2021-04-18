@@ -235,9 +235,9 @@ class _PetControlerState extends State<PetControler> {
                       formKey.currentState.save();
                       final String name = nameString;
                       final String age = ageString;
-                      final String photo = photoString;
+                      //final String photo = photoString;
                       final String note = noteString;
-                      createPets(name, age, photo, note);
+                      createPets(name, age, note);
                       //print(nameString);
                     }
                   },
@@ -417,13 +417,13 @@ class _PetControlerState extends State<PetControler> {
       //สร้าง Future เพื่อเรียก UserModel และส่งไปสรเาง User
       String name,
       String age,
-      String photo,
+      //String photo,
       note) async {
     //final String apiCreateUser = "http://127.0.0.1:8000/user_create_user";
 
     var response = await http.post(
         Uri.http('127.0.0.1:8000', '/user_create_pets'),
-        body: {"name": name, "age": age, "photo": photo, "note": note});
+        body: {"name": name, "age": age, "note": note});
     if (response.statusCode == 200) {
       print('success');
       //contentPopup();
