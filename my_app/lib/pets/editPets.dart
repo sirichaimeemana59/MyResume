@@ -15,6 +15,11 @@ class EditPetsForm extends StatefulWidget {
   _EditPetsFormState createState() => _EditPetsFormState();
 }
 
+class Todo {
+  final String name;
+  Todo(this.name);
+}
+
 class _EditPetsFormState extends State<EditPetsForm> {
   final formKey = GlobalKey<FormState>();
   String nameString, ageString, noteString, photoString;

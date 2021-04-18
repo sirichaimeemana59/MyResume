@@ -15,6 +15,7 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
   final formKey = GlobalKey<FormState>();
   String emailString, passwordString;
+  List users = [];
   //Text Input
   Widget emailText() {
     return TextFormField(
@@ -92,12 +93,13 @@ class _LoginFormState extends State<LoginForm> {
         body: {"email": email, "password": password});
 
     var status = json.decode(response.body)['status'];
-    //var users = json.decode(response.body)['user'];
+    //var items = json.decode(response.body)['user'];
+    var name = json.decode(response.body)['user_name'];
 
-    // print(response.statusCode);
+    // print(name);
     if (status == 1) {
       // print('success');
-      loginAlertDialog(context);
+      loginAlertDialog(context, name);
     } else {
       //print('Error');
       loginErrorAlertDialog(context);
@@ -133,7 +135,7 @@ class _LoginFormState extends State<LoginForm> {
   }
 
 //Popup Login Success
-  loginAlertDialog(BuildContext context) {
+  loginAlertDialog(BuildContext context, String name) {
     //popupRegisterController registerController = popupRegisterController();
     return showDialog(
         context: context,
@@ -153,7 +155,8 @@ class _LoginFormState extends State<LoginForm> {
                 child: Text('OK'),
                 onPressed: () {
                   MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                      builder: (BuildContext context) => MainMenu());
+                      builder: (BuildContext context) => MainMenu(),
+                      settings: RouteSettings(arguments: name));
                   Navigator.of(context).push(materialPageRoute);
                 },
               )
