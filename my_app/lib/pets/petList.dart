@@ -5,6 +5,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+//import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:my_app/cleass_model/petsModel.dart';
 import 'package:my_app/pets/editPets.dart';
 //import 'package:image_cropper/image_cropper.dart';
@@ -27,14 +29,17 @@ class Todo {
 class _PetControlerState extends State<PetControler> {
 //Create valiable and form validate
   final formKey = GlobalKey<FormState>();
-
+  //Var Image
+  PickedFile imageFile;
+  dynamic pickImageError;
+  final ImagePicker imagePicker = ImagePicker();
+  //End var Image
   String nameString, ageString, noteString, photoString;
   List pets = []; //สร้างไว้เพื่อรับข้อมูลรายการสัตว์
   List petsDetail = [];
   bool isLoading = false;
   bool disposed = false;
   DateTime time = DateTime.now();
-
   //File
   File file;
 
@@ -200,7 +205,8 @@ class _PetControlerState extends State<PetControler> {
                     ageText(),
                     //cameraButton(),
                     //galleryButton(),
-                    photoText(),
+                    showButton(),
+                    //photoText(),
                     noteText(),
                   ],
                 ),
@@ -309,6 +315,62 @@ class _PetControlerState extends State<PetControler> {
     );
   }
 
+  //Method brow Image
+  Widget showButton() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [cameraButton(), galleryButton()],
+    );
+  }
+
+//Camera
+  Widget cameraButton() {
+    return IconButton(
+      icon: Icon(
+        Icons.photo_camera,
+        size: 36.0,
+        color: Colors.blue.shade400,
+      ),
+      onPressed: () {
+        print('Click Me Camara');
+        chooseImage(ImageSource.camera);
+      },
+    );
+  }
+
+//สร้าง Thead เพื่อตรวจสอบการทำงานของปุ่มเลือกรูปเพื่อรอให้ทำงานให้เสร็จ
+  Future<void> chooseImage(ImageSource imageSource) async {
+    print('On me');
+    try {
+      // ignore: invalid_use_of_visible_for_testing_member
+      var pickedFile = await ImagePicker().getImage(source: imageSource);
+
+      if (!mounted)
+        setState(() {
+          file = pickedFile as File;
+        });
+    } catch (e) {
+      print(e);
+    }
+  }
+
+//Gallery
+  Widget galleryButton() {
+    return IconButton(
+      icon: Icon(
+        Icons.photo_album,
+        size: 36.0,
+        color: Colors.blue.shade400,
+      ),
+      onPressed: () {
+        print('Click Me Gallery');
+        chooseImage(ImageSource.gallery);
+      },
+    );
+  }
+//End Method brow Image
+
+//End input file
   Widget noteText() {
     return TextFormField(
       decoration: InputDecoration(

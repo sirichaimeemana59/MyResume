@@ -119,7 +119,7 @@ class _HomeState extends State<Home> {
           child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-          image: AssetImage('images/background2.jpg'),
+          image: AssetImage('images/PetBackground.png'),
           fit: BoxFit.cover,
         )),
         child: Center(
@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
             mainAxisSize: MainAxisSize.min, //ปรับวัตถให้อยู่กึ่งกลางหน้าจอ
             children: [
               SizedBox(
-                height: 450.0,
+                height: 550.0,
               ),
               showAppName(),
               SizedBox(
