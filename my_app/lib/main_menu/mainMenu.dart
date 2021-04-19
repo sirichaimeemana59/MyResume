@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/pets/petList.dart';
+import 'package:my_app/shop/shopList.dart';
 
 class MainMenu extends StatefulWidget {
   @override
@@ -8,7 +9,7 @@ class MainMenu extends StatefulWidget {
 
 class _MainMenuState extends State<MainMenu> {
   //Explicit
-  String user_name = null;
+  String username = '';
   Widget showCurrentWidget = PetControler();
   //EndExplicit
   //Method
@@ -19,7 +20,7 @@ class _MainMenuState extends State<MainMenu> {
       onTap: () {
         //print('object');
         MaterialPageRoute materialPageRoute =
-            MaterialPageRoute(builder: (BuildContext context) => MainMenu());
+            MaterialPageRoute(builder: (BuildContext context) => ShopList());
         Navigator.of(context).push(materialPageRoute);
 
         //Navigator.of(context).pop();
@@ -40,9 +41,9 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
-  Widget showName(String user_name) {
+  Widget showName(String username) {
     return Text(
-      'Name Customer : $user_name',
+      'Name Customer : $username',
       style: TextStyle(
           color: Colors.blue.shade600,
           fontWeight: FontWeight.bold,
@@ -58,7 +59,7 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
-  Widget showHead(String user_name) {
+  Widget showHead(String username) {
     return DrawerHeader(
       child: Column(
         children: [
@@ -66,17 +67,17 @@ class _MainMenuState extends State<MainMenu> {
           SizedBox(
             height: 8.0,
           ),
-          showName(user_name),
+          showName(username),
         ],
       ),
     );
   }
 
-  Widget showDrawer(String user_name) {
+  Widget showDrawer(String username) {
     return Drawer(
         child: ListView(
       children: [
-        showHead(user_name),
+        showHead(username),
         showListMenuPets(),
         showListMenuSales(),
       ],
@@ -86,8 +87,8 @@ class _MainMenuState extends State<MainMenu> {
   //End Method
   @override
   Widget build(BuildContext context) {
-    final user_name = ModalRoute.of(context).settings.arguments;
-    showName(user_name);
+    final username = ModalRoute.of(context).settings.arguments;
+    showName(username);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade900,
@@ -110,7 +111,7 @@ class _MainMenuState extends State<MainMenu> {
           ),
         ),
       )),
-      drawer: showDrawer(user_name),
+      drawer: showDrawer(username),
       // end Column
     );
   }
