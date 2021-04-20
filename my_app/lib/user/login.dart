@@ -122,15 +122,17 @@ class _LoginFormState extends State<LoginForm> {
   }
 
   Widget showButton() {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        loginButton(),
-        SizedBox(
-          width: 8.0,
-        ),
-        cancelButton(),
-      ],
+    return Center(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          loginButton(),
+          SizedBox(
+            width: 8.0,
+          ),
+          cancelButton(),
+        ],
+      ),
     );
   }
 
@@ -215,6 +217,9 @@ class _LoginFormState extends State<LoginForm> {
               children: [
                 emailText(),
                 passwordText(),
+                SizedBox(
+                  height: 25.0,
+                ),
                 showButton(),
               ],
             ),

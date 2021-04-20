@@ -15,7 +15,7 @@ class _MainMenuState extends State<MainMenu> {
   //Method
   Widget showListMenuSales() {
     return ListTile(
-      leading: Icon(Icons.pets, color: Colors.blue.shade600),
+      leading: Icon(Icons.pets, size: 36.0, color: Colors.blue.shade600),
       title: Text('ระบบสินค้า'),
       onTap: () {
         //print('object');
