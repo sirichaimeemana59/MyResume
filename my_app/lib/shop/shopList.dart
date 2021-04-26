@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/shop/foodShopList.dart';
+import 'package:my_app/shop/shopBody.dart';
 
 class ShopList extends StatefulWidget {
   @override
@@ -143,12 +144,16 @@ class _ShopListState extends State<ShopList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.yellow.shade800,
-        title: Text('SHOP'),
-        actions: [],
-      ),
-      body: getBody(),
+      appBar: buildAppBar(),
+      body: ShopBody(),
+    );
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      backgroundColor: Colors.yellow.shade800,
+      title: Text('SHOP'),
+      actions: [],
     );
   }
 }
