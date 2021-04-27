@@ -11,6 +11,8 @@ class FoodShopList extends StatefulWidget {
 class _FoodShopListState extends State<FoodShopList> {
   //Valiable
   List foodList = [];
+  int numItem = 1;
+
   //End Valiable
   //setState
   void initState() {
@@ -110,29 +112,45 @@ class _FoodShopListState extends State<FoodShopList> {
                     ButtonBar(
                       children: [
                         // ignore: deprecated_member_use
-                        FlatButton(
-                            child: Text('Edit'),
-                            onPressed: () async {
-                              // String id = id.toString();
-                              //var response = await http.get(Uri.http(
-                              //'127.0.0.1:8000',
-                              //'/user_get_detail_pets/' + '$_id'));
-                              //var name = 'toet';
-
-                              //var itemsPets =
-                              //json.decode(response.body)['data'];
-                              //print(itemsPets['name']);
-                              //var materialPageRoute = MaterialPageRoute(
-                              //builder: (context) => EditPetsForm(),
-                              //settings: RouteSettings(arguments: _id));
-                              //Navigator.push(context, materialPageRoute);
-                            }),
+                        FlatButton.icon(
+                          shape: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  style: BorderStyle.solid,
+                                  width: 1.0,
+                                  color: Colors.blue.shade800),
+                              borderRadius: BorderRadius.circular(8)),
+                          onPressed: () {
+                            setState(() {
+                              numItem++;
+                            });
+                          },
+                          icon: Icon(Icons.add),
+                          label: Text(''),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Text(
+                            numItem.toString().padLeft(2, ""),
+                          ),
+                        ),
                         // ignore: deprecated_member_use
-                        FlatButton(
-                            child: Text('Delete'),
-                            onPressed: () {
-                              //deletePetsDetail(id);
-                            })
+                        FlatButton.icon(
+                          shape: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  style: BorderStyle.solid,
+                                  width: 1.0,
+                                  color: Colors.blue.shade800),
+                              borderRadius: BorderRadius.circular(8)),
+                          onPressed: () {
+                            if (numItem > 1) {
+                              setState(() {
+                                numItem--;
+                              });
+                            }
+                          },
+                          icon: Center(child: Icon(Icons.delete)),
+                          label: Text(''),
+                        )
                       ],
                     )
                   ],
