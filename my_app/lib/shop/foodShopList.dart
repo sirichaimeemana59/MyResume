@@ -8,10 +8,32 @@ class FoodShopList extends StatefulWidget {
   _FoodShopListState createState() => _FoodShopListState();
 }
 
+class Item {
+  String nameTH;
+  String nameEN;
+  String price;
+  String detailTH;
+  String detailEN;
+  String id;
+  int numberofitems;
+
+  Item(
+      {this.nameTH,
+      this.nameEN,
+      this.price,
+      this.detailTH,
+      this.detailEN,
+      this.id,
+      this.numberofitems});
+}
+
 class _FoodShopListState extends State<FoodShopList> {
   //Valiable
+  // ignore: deprecated_member_use
   List foodList = [];
   int numItem = 1;
+  // ignore: avoid_init_to_null
+  int idItem = null;
 
   //End Valiable
   //setState
@@ -61,12 +83,13 @@ class _FoodShopListState extends State<FoodShopList> {
   }
 
   Widget getCard(item) {
+    //print(item);
     var nameTH = item['name_th'];
     //var nameEN = item['name_en'];
     var price = item['price'].toString();
     var detailTH = item['detail_th'];
     //var detailEN = item['detail_en'];
-    //var id = item['id'];
+    var id = item['id'];
     //var idFood = item['id_food'];
     return Card(
       child: Padding(
@@ -121,16 +144,21 @@ class _FoodShopListState extends State<FoodShopList> {
                               borderRadius: BorderRadius.circular(8)),
                           onPressed: () {
                             setState(() {
-                              numItem++;
+                              idItem = id;
+                              if (numItem > 1) {
+                                numItem--;
+                              }
                             });
                           },
-                          icon: Icon(Icons.add),
+                          icon: Icon(Icons.delete),
                           label: Text(''),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Text(
-                            numItem.toString().padLeft(2, ""),
+                            (idItem == id)
+                                ? numItem.toString().padLeft(2, "")
+                                : "1",
                           ),
                         ),
                         // ignore: deprecated_member_use
@@ -142,13 +170,12 @@ class _FoodShopListState extends State<FoodShopList> {
                                   color: Colors.blue.shade800),
                               borderRadius: BorderRadius.circular(8)),
                           onPressed: () {
-                            if (numItem > 1) {
-                              setState(() {
-                                numItem--;
-                              });
-                            }
+                            setState(() {
+                              idItem = id;
+                              numItem++;
+                            });
                           },
-                          icon: Center(child: Icon(Icons.delete)),
+                          icon: Center(child: Icon(Icons.add)),
                           label: Text(''),
                         )
                       ],
