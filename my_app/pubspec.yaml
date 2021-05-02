@@ -33,6 +33,7 @@ dependencies:
   english_words: ^4.0.0-0
   image_picker: ^0.7.4
   flutter_svg: ^0.21.0+1
+  flutter_session: ^0.1.1
   #multi_image_picker: ^4.8.0
   #image_picker: ^0.7.4
   #image_cropper: ^1.4.0

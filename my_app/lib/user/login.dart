@@ -5,6 +5,8 @@ import 'package:my_app/cleass_model/loginModel.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/main_menu/mainMenu.dart';
 import 'package:my_app/screen/home.dart';
+//import 'package:flutter_session/flutter_session.dart';
+
 //import 'package:my_app/user/loginSuccess.dart';
 
 class LoginForm extends StatefulWidget {
@@ -95,8 +97,10 @@ class _LoginFormState extends State<LoginForm> {
     var status = json.decode(response.body)['status'];
     //var items = json.decode(response.body)['user'];
     var name = json.decode(response.body)['user_name'];
+    //var userData = json.decode(response.body)['user'];
 
-    // print(name);
+    // print(userData[0]['id']);
+   // await FlutterSession().set('userData', userData[0]['id']);
     if (status == 1) {
       // print('success');
       loginAlertDialog(context, name);

@@ -26,7 +26,7 @@ class _HomeState extends State<Home> {
   Widget showAppName() {
     //สร้าง Widget เพื่อนำไปใช้ใน SafeArea
     return Text(
-      'My Resume',
+      'SIRICHAI',
       style: TextStyle(
         fontSize: 30.0,
         color: Colors.blue.shade700,
@@ -128,11 +128,11 @@ class _HomeState extends State<Home> {
             mainAxisSize: MainAxisSize.min, //ปรับวัตถให้อยู่กึ่งกลางหน้าจอ
             children: [
               SizedBox(
-                height: 550.0,
+                height: 500.0,
               ),
               showAppName(),
               SizedBox(
-                height: 8.0,
+                height: 30.0,
               ),
               showButton(),
             ],

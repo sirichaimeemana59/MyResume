@@ -1,5 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
-import 'package:my_app/shop/foodShopList.dart';
+import 'package:http/http.dart' as http;
 
 class OrderFoodList extends StatefulWidget {
   @override
@@ -30,7 +32,7 @@ class _OrderFoodListState extends State<OrderFoodList> {
     return ListView.builder(
       itemCount: orderList.length,
       itemBuilder: (BuildContext context, int index) {
-        // summaryPrice += int.parse(orderList[index]['price']);
+        //summaryPrice +=  price;
         //print(summaryPrice);
         return Container(
           height: 150,
@@ -184,11 +186,18 @@ class _OrderFoodListState extends State<OrderFoodList> {
     return IconButton(
         icon: Icon(Icons.shopping_basket),
         onPressed: () async {
-          var materialPageRoute = MaterialPageRoute(
-            builder: (context) => FoodShopList(),
-            //settings: RouteSettings(arguments: cartFood)
-          );
-          Navigator.push(context, materialPageRoute);
+          createOrder();
         });
+  }
+
+  createOrder() async {
+    var order = jsonEncode(orderList);
+    var response = await http.post(
+        Uri.http('127.0.0.1:8000', '/user_create_order'),
+        body: order,
+        headers: {'Content-type': 'application/json'});
+    if (response.statusCode == 200) {
+      print('success');
+    } else {}
   }
 }

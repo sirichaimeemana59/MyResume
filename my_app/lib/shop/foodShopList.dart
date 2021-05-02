@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+//import 'package:flutter_session/flutter_session.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/shop/orderFood.dart';
 
@@ -47,7 +48,9 @@ class _FoodShopListState extends State<FoodShopList> {
   }
 
 //Cart Shop
-  Future<List<Item>> cartShop(nameTH, nameEN, price, id, numberofitems,priceTo) async {
+  // ignore: missing_return
+  Future<List<Item>> cartShop(
+      nameTH, nameEN, price, id, numberofitems, priceTo) async {
     // ignore: deprecated_member_use
     //var values = List<Item>();
     //await Future.delayed(Duration(seconds: 2));
@@ -64,7 +67,7 @@ class _FoodShopListState extends State<FoodShopList> {
         "price": price,
         "id": id,
         "numberofitems": 1,
-        "priceTo":price
+        "priceTo": price
       }
     ];
 
@@ -209,7 +212,8 @@ class _FoodShopListState extends State<FoodShopList> {
                                   color: Colors.blue.shade800),
                               borderRadius: BorderRadius.circular(8)),
                           onPressed: () {
-                            cartShop(nameTH, nameEN, price, id, numberofitems,price);
+                            cartShop(nameTH, nameEN, price, id, numberofitems,
+                                price);
                             // setState(() {
                             //   idItem = id;
                             //   numItem++;
@@ -261,3 +265,15 @@ class _FoodShopListState extends State<FoodShopList> {
         });
   }
 }
+
+// class UserID extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Material(
+//         child: FutureBuilder(
+//             future: FlutterSession().get('userData'),
+//             builder: (context, snapshot) {
+//               return Text(snapshot.hasData ? snapshot.data : 'Loading...');
+//             }));
+//   }
+// }
