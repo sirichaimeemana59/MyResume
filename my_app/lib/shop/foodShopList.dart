@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/shop/orderFood.dart';
 
 class FoodShopList extends StatefulWidget {
   @override
@@ -11,7 +12,8 @@ class FoodShopList extends StatefulWidget {
 class Item {
   String nameTH;
   String nameEN;
-  String price;
+  int price;
+  int priceTo;
   String detailTH;
   String detailEN;
   String id;
@@ -28,9 +30,11 @@ class Item {
 }
 
 class _FoodShopListState extends State<FoodShopList> {
+  var values = [];
   //Valiable
   // ignore: deprecated_member_use
   List foodList = [];
+  List cartFood = [];
   int numItem = 1;
   // ignore: avoid_init_to_null
   int idItem = null;
@@ -42,6 +46,40 @@ class _FoodShopListState extends State<FoodShopList> {
     this.fetchFoodList(null);
   }
 
+//Cart Shop
+  Future<List<Item>> cartShop(nameTH, nameEN, price, id, numberofitems,priceTo) async {
+    // ignore: deprecated_member_use
+    //var values = List<Item>();
+    //await Future.delayed(Duration(seconds: 2));
+    //values.add(Item(
+    // nameTH: nameTH,
+    // nameEN: nameEN,
+    //price: price,
+    //id: id,
+    //numberofitems: 1));
+    values = [
+      {
+        "nameTH": nameTH,
+        "nameEN": nameEN,
+        "price": price,
+        "id": id,
+        "numberofitems": 1,
+        "priceTo":price
+      }
+    ];
+
+    //return values;
+    if (nameTH != null) {
+      if (mounted)
+        setState(() {
+          cartFood.addAll(values);
+        });
+    }
+
+    //print(cartFood.length);
+  }
+
+//End Cart
   //End setState
   //Connect API
   fetchFoodList(id) async {
@@ -85,11 +123,12 @@ class _FoodShopListState extends State<FoodShopList> {
   Widget getCard(item) {
     //print(item);
     var nameTH = item['name_th'];
-    //var nameEN = item['name_en'];
+    var nameEN = item['name_en'];
     var price = item['price'].toString();
     var detailTH = item['detail_th'];
     //var detailEN = item['detail_en'];
     var id = item['id'];
+    int numberofitems = 0;
     //var idFood = item['id_food'];
     return Card(
       child: Padding(
@@ -135,31 +174,31 @@ class _FoodShopListState extends State<FoodShopList> {
                     ButtonBar(
                       children: [
                         // ignore: deprecated_member_use
-                        FlatButton.icon(
-                          shape: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  style: BorderStyle.solid,
-                                  width: 1.0,
-                                  color: Colors.blue.shade800),
-                              borderRadius: BorderRadius.circular(8)),
-                          onPressed: () {
-                            setState(() {
-                              idItem = id;
-                              if (numItem > 1) {
-                                numItem--;
-                              }
-                            });
-                          },
-                          icon: Icon(Icons.delete),
-                          label: Text(''),
-                        ),
+                        // FlatButton.icon(
+                        //   shape: OutlineInputBorder(
+                        //       borderSide: BorderSide(
+                        //           style: BorderStyle.solid,
+                        //           width: 1.0,
+                        //           color: Colors.blue.shade800),
+                        //       borderRadius: BorderRadius.circular(8)),
+                        //   onPressed: () {
+                        //     setState(() {
+                        //       idItem = id;
+                        //       if (numItem > 1) {
+                        //         numItem--;
+                        //       }
+                        //     });
+                        //   },
+                        //   icon: Icon(Icons.delete),
+                        //   label: Text(''),
+                        // ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
-                          child: Text(
-                            (idItem == id)
-                                ? numItem.toString().padLeft(2, "")
-                                : "1",
-                          ),
+                          // child: Text(
+                          //   (idItem == id)
+                          //       ? numItem.toString().padLeft(2, "")
+                          //       : "1",
+                          // ),
                         ),
                         // ignore: deprecated_member_use
                         FlatButton.icon(
@@ -170,12 +209,13 @@ class _FoodShopListState extends State<FoodShopList> {
                                   color: Colors.blue.shade800),
                               borderRadius: BorderRadius.circular(8)),
                           onPressed: () {
-                            setState(() {
-                              idItem = id;
-                              numItem++;
-                            });
+                            cartShop(nameTH, nameEN, price, id, numberofitems,price);
+                            // setState(() {
+                            //   idItem = id;
+                            //   numItem++;
+                            // });
                           },
-                          icon: Center(child: Icon(Icons.add)),
+                          icon: Center(child: Icon(Icons.shopping_bag)),
                           label: Text(''),
                         )
                       ],
@@ -200,9 +240,24 @@ class _FoodShopListState extends State<FoodShopList> {
       appBar: AppBar(
         backgroundColor: Colors.yellow.shade800,
         title: Text('foodShop'),
-        actions: [],
+        actions: [
+          submitCart(),
+        ],
       ),
       body: getbody(),
     );
+  }
+
+  Widget submitCart() {
+    return IconButton(
+        icon: Icon(Icons.shopping_basket),
+        onPressed: () async {
+          var materialPageRoute = MaterialPageRoute(
+              builder: (context) => OrderFoodList(),
+              settings: RouteSettings(arguments: cartFood));
+          Navigator.push(context, materialPageRoute);
+
+          print(cartFood.length);
+        });
   }
 }
