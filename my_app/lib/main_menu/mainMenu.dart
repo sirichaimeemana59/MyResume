@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/demo_ui/work_ui/home_ui.dart';
 import 'package:my_app/pets/petList.dart';
 import 'package:my_app/shop/shopList.dart';
 
@@ -35,6 +36,19 @@ class _MainMenuState extends State<MainMenu> {
       onTap: () {
         MaterialPageRoute materialPageRoute = MaterialPageRoute(
             builder: (BuildContext context) => PetControler());
+        Navigator.of(context).push(materialPageRoute);
+        // Navigator.of(context).pop();
+      },
+    );
+  }
+
+  Widget showListMenuUI() {
+    return ListTile(
+      leading: Icon(Icons.pets, size: 36.0, color: Colors.blue.shade600),
+      title: Text('UI Design'),
+      onTap: () {
+        MaterialPageRoute materialPageRoute = MaterialPageRoute(
+            builder: (BuildContext context) => HomeUIDesign());
         Navigator.of(context).push(materialPageRoute);
         // Navigator.of(context).pop();
       },
@@ -80,6 +94,7 @@ class _MainMenuState extends State<MainMenu> {
         showHead(username),
         showListMenuPets(),
         showListMenuSales(),
+        showListMenuUI(),
       ],
     ));
   }

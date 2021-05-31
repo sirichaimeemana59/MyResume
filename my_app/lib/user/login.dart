@@ -89,24 +89,31 @@ class _LoginFormState extends State<LoginForm> {
       String email,
       String password) async {
     //final String apiCreateUser = "http://127.0.0.1:8000/user_create_user";
+    try {
+      var response = await http.post(
+          Uri.http('127.0.0.1:8000', '/mobile_user_login'),
+          body: {"email": email, "password": password});
 
-    var response = await http.post(
-        Uri.http('127.0.0.1:8000', '/mobile_user_login'),
-        body: {"email": email, "password": password});
+      var status = json.decode(response.body)['status'];
+      //var items = json.decode(response.body)['user'];
+      var name = json.decode(response.body)['user_name'];
+      //var userData = json.decode(response.body)['user'];
 
-    var status = json.decode(response.body)['status'];
-    //var items = json.decode(response.body)['user'];
-    var name = json.decode(response.body)['user_name'];
-    //var userData = json.decode(response.body)['user'];
-
-    // print(userData[0]['id']);
-   // await FlutterSession().set('userData', userData[0]['id']);
-    if (status == 1) {
-      // print('success');
-      loginAlertDialog(context, name);
-    } else {
-      //print('Error');
-      loginErrorAlertDialog(context);
+      // print(userData[0]['id']);
+      // await FlutterSession().set('userData', userData[0]['id']);
+      if (status == 1) {
+        // print('success');
+        loginAlertDialog(context, name);
+      } else {
+        //print('Error');
+        loginErrorAlertDialog(context);
+      }
+    } catch (e) {
+      //print('object');
+      MaterialPageRoute materialPageRoute = MaterialPageRoute(
+          builder: (BuildContext context) => MainMenu(),
+          settings: RouteSettings(arguments: "NOT LOGIN"));
+      Navigator.of(context).push(materialPageRoute);
     }
   }
 
