@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/demo_ui/shopUI/shopUIdemo.dart';
 
 class HomeUIDesign extends StatefulWidget {
   @override
@@ -69,7 +70,11 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
               "เข้าใช้งาน",
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
-            onPressed: () {}));
+            onPressed: () {
+              MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                  builder: (BuildContext context) => ShopUIDemo());
+              Navigator.of(context).push(materialPageRoute);
+            }));
   }
 
   Widget registerButton() {
