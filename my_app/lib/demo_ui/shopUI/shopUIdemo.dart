@@ -12,7 +12,7 @@ class _ShopUIDemoState extends State<ShopUIDemo> {
     ShopModel("เขียง", "เอกมัย 2", "08:00", "18:00", "k.jpeg"),
     ShopModel("ตู้กับข้าว", "เอกมัย 3", "08:00", "18:00", "t.jpeg"),
     ShopModel("ร้านอาหาร สะพานควาย", "เอกมัย 4", "08:00", "18:00", "3.jpeg"),
-    ShopModel("ร้านอาหาร ยศเส", "เอกมัย 5", "08:00", "18:00", "5.jpeg"),
+    ShopModel("ร้านอาหาร ยศเส", "เอกมัย 5", "08:00", "18:00", "yod.jpeg"),
   ];
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _ShopUIDemoState extends State<ShopUIDemo> {
                         decoration: BoxDecoration(
                           image: DecorationImage(
                             image: new AssetImage("images/${shop.image}"),
-                            fit: BoxFit.fitHeight,
+                            fit: BoxFit.cover,
                           ),
                           //borderRadius: BorderRadius.circular(30.0),
                           color: Colors.red.shade100,
