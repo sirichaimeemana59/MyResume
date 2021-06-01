@@ -19,17 +19,13 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
               color: Colors.red.shade900,
             ),
             child: Center(
-                child: ListView(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 showLogo(),
-                SizedBox(
-                  height: 96,
-                ),
+
                 //Text("UI SIRICHAI"),
                 showButton(),
-                SizedBox(
-                  height: 200,
-                ),
                 textHelp(),
               ],
             )),
@@ -95,33 +91,151 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
 
   Widget showLogo() {
     return Container(
-      width: 250,
-      height: 250,
-      child: Image.asset("images/dog.png"),
-    );
+        width: 150,
+        height: 150,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset("images/dog.png"),
+          ],
+        ));
   }
 
   Widget textHelp() {
     return Container(
         padding: EdgeInsets.all(17),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              "ต้องการความช่วยเหลือ คลิก",
+              "ต้องการความช่วยเหลือ",
               style: TextStyle(color: Colors.white, fontSize: 18),
             ),
-            SizedBox(
-              width: 145,
+            ButtonTheme(
+              minWidth: 20,
+              height: 20,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              // ignore: deprecated_member_use
+              child: RaisedButton(
+                onPressed: () {},
+                child: Text(
+                  "คลิก",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold),
+                ),
+                padding: EdgeInsets.all(0),
+                color: Colors.red.shade900,
+              ),
             ),
             ClipRRect(
               borderRadius: BorderRadius.circular(7),
-              child: Image.asset(
-                "images/TH.png",
-                width: 30,
-                height: 21,
+              // ignore: deprecated_member_use
+              child: FlatButton(
+                minWidth: 39,
+                height: 29,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                child: Image.asset(
+                  "images/TH.png",
+                  width: 30,
+                  height: 21,
+                ),
+                padding: EdgeInsets.all(0),
+                color: Colors.transparent,
+                onPressed: () {
+                  languageAlertDialog(context);
+                },
               ),
             ),
           ],
         ));
+  }
+
+  languageAlertDialog(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+                content: Container(
+                  width: 250,
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      rowLanguageTHAlertDialog(),
+                      rowLanguageENAlertDialog(),
+                    ],
+                  ),
+                ),
+                title: textTileAlertDialog());
+          });
+        });
+  }
+
+  Widget textTileAlertDialog() {
+    return Text(
+      "เลือกภาษา",
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget rowLanguageTHAlertDialog() {
+    return Container(
+      child: ButtonTheme(
+        // ignore: deprecated_member_use
+        child: RaisedButton(
+          color: Colors.white,
+          onPressed: () {},
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "images/TH.png",
+                width: 35,
+                height: 35,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Text('ภาษาไทย'),
+              // SizedBox(
+              //   width: 80,
+              // ),
+              // Icon(Icons.check),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget rowLanguageENAlertDialog() {
+    return Container(
+      child: ButtonTheme(
+        // ignore: deprecated_member_use
+        child: RaisedButton(
+          color: Colors.white,
+          onPressed: () {},
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "images/EN.png",
+                width: 35,
+                height: 35,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Text('ภาษาอังกฤษ'),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
