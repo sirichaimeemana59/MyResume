@@ -50,39 +50,53 @@ class _ShopUIDemoState extends State<ShopUIDemo> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0)),
                 elevation: 7.0,
-                child: Container(
-                  width: 500,
-                  color: Colors.grey.shade300,
-                  child: Column(
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 150,
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                            image: new AssetImage("images/${shop.image}"),
-                            fit: BoxFit.cover,
+                child: ButtonTheme(
+                  padding: EdgeInsets.all(0),
+                  // ignore: deprecated_member_use
+                  child: RaisedButton(
+                    onPressed: () {
+                      print(shop.name.toString());
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 2,
+                      color: Colors.grey.shade300,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Container(
+                            //width: 200,
+                            width: MediaQuery.of(context).size.width * 2,
+                            //height: 106,
+                            height: MediaQuery.of(context).size.height * 0.15,
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: new AssetImage("images/${shop.image}"),
+                                fit: BoxFit.cover,
+                              ),
+                              //borderRadius: BorderRadius.circular(30.0),
+                              color: Colors.red.shade100,
+                            ),
                           ),
-                          //borderRadius: BorderRadius.circular(30.0),
-                          color: Colors.red.shade100,
-                        ),
+                          SizedBox(height: 8.0),
+                          Text(
+                            "ร้าน : ${shop.name}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          Text(
+                            "เปิด : ${shop.timeOn} ปิด : ${shop.timeClosed}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                        ],
                       ),
-                      SizedBox(height: 8.0),
-                      Text(
-                        "ร้าน : ${shop.name}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                      Text(
-                        "เปิด : ${shop.timeOn} ปิด : ${shop.timeClosed}",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               );
