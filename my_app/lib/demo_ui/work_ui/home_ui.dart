@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:my_app/demo_ui/shopUI/shopUIdemo.dart';
-import 'package:my_app/main.dart';
 
 class HomeUIDesign extends StatefulWidget {
   @override
@@ -8,13 +8,16 @@ class HomeUIDesign extends StatefulWidget {
 }
 
 class _HomeUIDesignState extends State<HomeUIDesign> {
-  Locale locale;
-
-  void setLocale(Locale value) {
-    setState(() {
-      locale = value;
-    });
-  }
+  final locales = [
+    {
+      'name': 'English',
+      'locale': Locale('en'),
+    },
+    {
+      'name': 'Thailind',
+      'locale': Locale('th'),
+    }
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +26,8 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
           backgroundColor: Colors.red.shade900,
           elevation: 0, //None Border Appbar
         ),
+
+        // translations: TextTranslations(),
         body: SafeArea(
           child: Container(
             decoration: BoxDecoration(
@@ -53,7 +58,7 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
             height: 34,
           ),
           Text(
-            "ยังไม่มีบัญชี SIRICHAI ใช่หรือไม่?",
+            'noneacc'.tr,
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           SizedBox(
@@ -76,7 +81,7 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
                 borderRadius: BorderRadius.circular(26),
                 side: BorderSide(color: Colors.white)),
             child: Text(
-              "เข้าใช้งาน",
+              'login'.tr,
               style: TextStyle(color: Colors.white, fontSize: 25),
             ),
             onPressed: () {
@@ -97,7 +102,7 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
                 borderRadius: BorderRadius.circular(26),
                 side: BorderSide(color: Colors.yellow.shade600)),
             child: Text(
-              "สมัครเข้าใช้งาน",
+              'register'.tr,
               style: TextStyle(color: Colors.red.shade900, fontSize: 25),
             ),
             onPressed: () {}));
@@ -122,9 +127,12 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "ต้องการความช่วยเหลือ",
-              style: TextStyle(color: Colors.white, fontSize: 18),
+            Center(
+              child: Text(
+                'help'.tr,
+                style: TextStyle(color: Colors.white, fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
             ),
             ButtonTheme(
               minWidth: 20,
@@ -134,7 +142,7 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
               child: RaisedButton(
                 onPressed: () {},
                 child: Text(
-                  "คลิก",
+                  'click'.tr,
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 18,
@@ -191,7 +199,7 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
 
   Widget textTileAlertDialog() {
     return Text(
-      "เลือกภาษา",
+      'slectLang'.tr,
       style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
       textAlign: TextAlign.center,
     );
@@ -204,12 +212,15 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
         child: RaisedButton(
           color: Colors.white,
           onPressed: () {
+            //print(locales[1]['locale']);
+            updateLocale(locales[1]['locale'], context);
+
             //setLocale(Locale.fromSubtags(languageCode: 'th'));
             //print(locale.toString());
-            MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                builder: (BuildContext context) => Myapp(),
-                settings: RouteSettings(arguments: 'th'));
-            Navigator.of(context).push(materialPageRoute);
+            // MaterialPageRoute materialPageRoute = MaterialPageRoute(
+            //     builder: (BuildContext context) => Myapp(),
+            //     settings: RouteSettings(arguments: 'th'));
+            // Navigator.of(context).push(materialPageRoute);
           },
           child: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -222,7 +233,7 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
               SizedBox(
                 width: 15,
               ),
-              Text('ภาษาไทย'),
+              Text('th'.tr),
               // SizedBox(
               //   width: 80,
               // ),
@@ -241,12 +252,13 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
         child: RaisedButton(
           color: Colors.white,
           onPressed: () {
+            updateLocale(locales[0]['locale'], context);
             //setLocale(Locale.fromSubtags(languageCode: 'en'));
             //print(locale.toString());
-            MaterialPageRoute materialPageRoute = MaterialPageRoute(
-                builder: (BuildContext context) => Myapp(),
-                settings: RouteSettings(arguments: 'en'));
-            Navigator.of(context).push(materialPageRoute);
+            // MaterialPageRoute materialPageRoute = MaterialPageRoute(
+            //     builder: (BuildContext context) => Myapp(),
+            //     settings: RouteSettings(arguments: 'en'));
+            // Navigator.of(context).push(materialPageRoute);
           },
           child: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -259,11 +271,16 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
               SizedBox(
                 width: 15,
               ),
-              Text('ภาษาอังกฤษ'),
+              Text('en'.tr),
             ],
           ),
         ),
       ),
     );
+  }
+
+  updateLocale(Locale locale, BuildContext context) {
+    Navigator.of(context).pop();
+    Get.updateLocale(locale);
   }
 }

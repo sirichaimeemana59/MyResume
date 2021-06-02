@@ -38,6 +38,7 @@ dependencies:
   flutter_session: ^0.1.1
   flutter_launcher_icons: ^0.9.0
   flutter_sheet_localization: ^5.1.0
+  get: ^4.1.4
   #multi_image_picker: ^4.8.0
   #image_picker: ^0.7.4
   #image_cropper: ^1.4.0

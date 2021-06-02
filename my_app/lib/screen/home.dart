@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/appLocalizations.dart';
+import 'package:get/get.dart';
 import 'package:my_app/user/login.dart';
 import 'package:my_app/user/user.dart';
 //import 'dart:convert' as convert;
@@ -13,6 +13,16 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final locales = [
+    {
+      'name': 'English',
+      'locale': Locale('en'),
+    },
+    {
+      'name': 'Thailind',
+      'locale': Locale('th'),
+    }
+  ];
 //Method
 
   Widget showLogo() {
@@ -27,7 +37,7 @@ class _HomeState extends State<Home> {
   Widget showAppName() {
     //สร้าง Widget เพื่อนำไปใช้ใน SafeArea
     return Text(
-      AppLocalizations.of(context).translate('app_name'),
+      'app_name'.tr,
       style: TextStyle(
         fontSize: 30.0,
         color: Colors.blue.shade700,
@@ -215,7 +225,9 @@ class _HomeState extends State<Home> {
         // ignore: deprecated_member_use
         child: RaisedButton(
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            updateLocale(locales[1]['locale'], context);
+          },
           child: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -246,6 +258,8 @@ class _HomeState extends State<Home> {
         child: RaisedButton(
           color: Colors.white,
           onPressed: () {
+            // ignore: unnecessary_brace_in_string_interps
+            updateLocale(locales[0]['locale'], context);
             //setLocale(Locale.fromSubtags(languageCode: 'en'));
             //print(locale.toString());
           },
@@ -266,5 +280,10 @@ class _HomeState extends State<Home> {
         ),
       ),
     );
+  }
+
+  updateLocale(Locale locale, BuildContext context) {
+    Navigator.of(context).pop();
+    Get.updateLocale(locale);
   }
 }

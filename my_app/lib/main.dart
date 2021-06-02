@@ -1,9 +1,9 @@
 //import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:my_app/appLocalizations.dart';
+import 'package:get/route_manager.dart';
 import 'package:my_app/screen/home.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:my_app/textTranslations.dart';
 //import 'package:flutter_openvpn/flutter_openvpn.dart';
 
 void main() {
@@ -14,25 +14,27 @@ void main() {
 class Myapp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      supportedLocales: [
-        Locale('en', ''),
-        Locale('th', ''),
-      ],
-      localizationsDelegates: [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-      ],
-      localeResolutionCallback: (locale, supportedLocales) {
-        for (var supportedLocales in supportedLocales) {
-          if (supportedLocales.languageCode == locale.languageCode &&
-              supportedLocales.countryCode == locale.countryCode) {
-            return supportedLocales;
-          }
-        }
-        return supportedLocales.first;
-      },
+    return GetMaterialApp(
+      translations: TextTranslations(),
+      locale: Get.deviceLocale,
+      // supportedLocales: [
+      //   Locale('en', ''),
+      //   Locale('th', ''),
+      // ],
+      // localizationsDelegates: [
+      //   AppLocalizations.delegate,
+      //   GlobalMaterialLocalizations.delegate,
+      //   GlobalWidgetsLocalizations.delegate,
+      // ],
+      // localeResolutionCallback: (locale, supportedLocales) {
+      //   for (var supportedLocales in supportedLocales) {
+      //     if (supportedLocales.languageCode == locale.languageCode &&
+      //         supportedLocales.countryCode == locale.countryCode) {
+      //       return supportedLocales;
+      //     }
+      //   }
+      //   return supportedLocales.first;
+      // },
       home: Home(),
     );
   }
