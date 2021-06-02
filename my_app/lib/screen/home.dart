@@ -91,6 +91,7 @@ class _HomeState extends State<Home> {
         SizedBox(
           width: 8.0,
         ),
+        textHelp(),
         //apiTestButton()
       ],
     );
@@ -146,6 +147,124 @@ class _HomeState extends State<Home> {
       //   children: [showAppName(), showAppName(), showAppName(), showAppName()],
       // )),
       // end row
+    );
+  }
+
+  Widget textHelp() {
+    return Container(
+        padding: EdgeInsets.all(17),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(7),
+              // ignore: deprecated_member_use
+              child: FlatButton(
+                minWidth: 39,
+                height: 29,
+                materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                child: Image.asset(
+                  "images/TH.png",
+                  width: 30,
+                  height: 21,
+                ),
+                padding: EdgeInsets.all(0),
+                color: Colors.transparent,
+                onPressed: () {
+                  languageAlertDialog(context);
+                },
+              ),
+            ),
+          ],
+        ));
+  }
+
+  languageAlertDialog(BuildContext context) async {
+    return await showDialog(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (context, setState) {
+            return AlertDialog(
+                content: Container(
+                  width: 250,
+                  height: 100,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      rowLanguageTHAlertDialog(),
+                      rowLanguageENAlertDialog(),
+                    ],
+                  ),
+                ),
+                title: textTileAlertDialog());
+          });
+        });
+  }
+
+  Widget textTileAlertDialog() {
+    return Text(
+      "เลือกภาษา",
+      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  Widget rowLanguageTHAlertDialog() {
+    return Container(
+      child: ButtonTheme(
+        // ignore: deprecated_member_use
+        child: RaisedButton(
+          color: Colors.white,
+          onPressed: () {},
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "images/TH.png",
+                width: 35,
+                height: 35,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Text('ภาษาไทย'),
+              // SizedBox(
+              //   width: 80,
+              // ),
+              // Icon(Icons.check),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget rowLanguageENAlertDialog() {
+    return Container(
+      child: ButtonTheme(
+        // ignore: deprecated_member_use
+        child: RaisedButton(
+          color: Colors.white,
+          onPressed: () {
+            //setLocale(Locale.fromSubtags(languageCode: 'en'));
+            //print(locale.toString());
+          },
+          child: Row(
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Image.asset(
+                "images/EN.png",
+                width: 35,
+                height: 35,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Text('ภาษาอังกฤษ'),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

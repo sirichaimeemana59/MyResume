@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/demo_ui/shopUI/shopUIdemo.dart';
+import 'package:my_app/main.dart';
 
 class HomeUIDesign extends StatefulWidget {
   @override
@@ -7,6 +8,14 @@ class HomeUIDesign extends StatefulWidget {
 }
 
 class _HomeUIDesignState extends State<HomeUIDesign> {
+  Locale locale;
+
+  void setLocale(Locale value) {
+    setState(() {
+      locale = value;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,7 +203,14 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
         // ignore: deprecated_member_use
         child: RaisedButton(
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            //setLocale(Locale.fromSubtags(languageCode: 'th'));
+            //print(locale.toString());
+            MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                builder: (BuildContext context) => Myapp(),
+                settings: RouteSettings(arguments: 'th'));
+            Navigator.of(context).push(materialPageRoute);
+          },
           child: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -224,7 +240,14 @@ class _HomeUIDesignState extends State<HomeUIDesign> {
         // ignore: deprecated_member_use
         child: RaisedButton(
           color: Colors.white,
-          onPressed: () {},
+          onPressed: () {
+            //setLocale(Locale.fromSubtags(languageCode: 'en'));
+            //print(locale.toString());
+            MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                builder: (BuildContext context) => Myapp(),
+                settings: RouteSettings(arguments: 'en'));
+            Navigator.of(context).push(materialPageRoute);
+          },
           child: Row(
             //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
