@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/appLocalizations.dart';
 import 'package:my_app/user/login.dart';
 import 'package:my_app/user/user.dart';
 //import 'dart:convert' as convert;
@@ -26,7 +27,7 @@ class _HomeState extends State<Home> {
   Widget showAppName() {
     //สร้าง Widget เพื่อนำไปใช้ใน SafeArea
     return Text(
-      'SIRICHAI',
+      AppLocalizations.of(context).translate('app_name'),
       style: TextStyle(
         fontSize: 30.0,
         color: Colors.blue.shade700,
