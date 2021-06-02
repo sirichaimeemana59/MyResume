@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/cleass_model/shopModel.dart';
+import 'package:my_app/demo_ui/shopUI/shopDetailDemoUI.dart';
 
 class ShopUIDemo extends StatefulWidget {
   @override
@@ -16,6 +17,8 @@ class _ShopUIDemoState extends State<ShopUIDemo> {
   ];
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    //print(size);
     return Scaffold(
       appBar: AppBar(
         title: Text('Shop'),
@@ -55,7 +58,11 @@ class _ShopUIDemoState extends State<ShopUIDemo> {
                   // ignore: deprecated_member_use
                   child: RaisedButton(
                     onPressed: () {
-                      print(shop.name.toString());
+                      // print(shop.name.toString());
+                      MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                          builder: (BuildContext context) => ShopDetail());
+                      Navigator.of(context).push(
+                          materialPageRoute); //การสร้าง Route เพื่อเปิดหน้าใหม่
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 2,
@@ -93,6 +100,9 @@ class _ShopUIDemoState extends State<ShopUIDemo> {
                               fontWeight: FontWeight.bold,
                               fontSize: 15.0,
                             ),
+                          ),
+                          SizedBox(
+                            height: 8,
                           ),
                         ],
                       ),
