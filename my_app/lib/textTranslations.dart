@@ -26,6 +26,7 @@ class TextTranslations extends Translations {
           'card': 'Card',
           'order': 'Order',
           'stores': 'Stores',
+          'pay': 'Payment',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -51,6 +52,7 @@ class TextTranslations extends Translations {
           'card': 'บัตร',
           'order': 'ออเดอร์',
           'stores': 'ร้าน',
+          'pay': 'ชำระเงิน',
         }
       };
 }

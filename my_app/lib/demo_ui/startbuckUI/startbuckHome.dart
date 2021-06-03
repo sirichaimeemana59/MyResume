@@ -37,6 +37,10 @@ class _StartBuckUIState extends State<StartBuckUI> {
     NavigaList("stores".tr, "banner4.png", "kk"),
   ];
 
+  //Floating Button
+  FloatingActionButtonLocation payLocation =
+      FloatingActionButtonLocation.endDocked;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,7 +158,33 @@ class _StartBuckUIState extends State<StartBuckUI> {
           ],
         ),
       ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        label: Text('pay'.tr),
+        //icon: Icon(Icons.thumb_up),
+        backgroundColor: HexColor('#00B06B'),
+      ),
     );
+    // floatingActionButton: FloatingActionButton(
+    //   mini: this.isBlank,
+    //   backgroundColor: HexColor('#00B06B'),
+    //   child: Container(
+    //     width: MediaQuery.of(context).size.width,
+    //     height: MediaQuery.of(context).size.height,
+    //     child: Column(
+    //       mainAxisAlignment: MainAxisAlignment.center,
+    //       children: [
+    //         Text('pay'.tr),
+    //       ],
+    //     ),
+    //   ),
+    //   onPressed: () {
+    //     //print('object');
+    //   },
+    // ),
+    //);
   }
 
   Widget textWellcome() {
@@ -223,7 +253,8 @@ class _StartBuckUIState extends State<StartBuckUI> {
           SizedBox(
             width: 100,
           ),
-          Icon(Icons.settings),
+          topMenuSeeting(),
+          //Icon(Icons.settings),
         ],
       ),
     );
@@ -232,8 +263,8 @@ class _StartBuckUIState extends State<StartBuckUI> {
   Widget topMenuSeeting() {
     return Container(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        //crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Icon(Icons.settings),
         ],
@@ -365,11 +396,11 @@ class _StartBuckUIState extends State<StartBuckUI> {
       // color: HexColor('#433C3B'),
       decoration: BoxDecoration(
         image: DecorationImage(
-            image: AssetImage("images/banner1.png"), fit: BoxFit.fill),
+          image: AssetImage("images/banner1.png"),
+          fit: BoxFit.fill,
+        ),
       ),
       //color: Colors.transparent,
-      width: MediaQuery.of(context).size.width,
-      height: 183,
       padding: EdgeInsets.all(20),
       margin: EdgeInsets.only(bottom: 8),
       child: Column(
