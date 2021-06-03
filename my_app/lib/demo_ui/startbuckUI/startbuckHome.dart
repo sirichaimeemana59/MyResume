@@ -88,7 +88,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
               child: Row(
                 children: [
                   // ignore: deprecated_member_use
-                  RaisedButton(
+                  FlatButton(
                     child: Column(
                       children: [
                         Icon(
@@ -105,7 +105,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
                     width: 4,
                   ),
                   // ignore: deprecated_member_use
-                  RaisedButton(
+                  FlatButton(
                     child: Column(
                       children: [
                         Icon(
@@ -122,7 +122,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
                     width: 4,
                   ),
                   // ignore: deprecated_member_use
-                  RaisedButton(
+                  FlatButton(
                     child: Column(
                       children: [
                         Icon(
@@ -139,7 +139,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
                     width: 4,
                   ),
                   // ignore: deprecated_member_use
-                  RaisedButton(
+                  FlatButton(
                     child: Column(
                       children: [
                         Icon(
@@ -221,53 +221,94 @@ class _StartBuckUIState extends State<StartBuckUI> {
 
   Widget topMenu() {
     return Container(
-      padding: EdgeInsets.only(left: 20),
+      padding: EdgeInsets.only(left: 15, right: 24),
       child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(Icons.person),
-          SizedBox(
-            width: 8,
-          ),
-          Text(
-            'profile'.tr,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          Expanded(
+            child: Row(
+              children: [
+                ButtonTheme(
+                  buttonColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: Colors.transparent),
+                  ),
+                  child: Row(
+                    children: [
+                      // ignore: deprecated_member_use
+                      FlatButton(
+                          child: Row(
+                            children: [
+                              Icon(Icons.person),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'profile'.tr,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          onPressed: () {}),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      // ignore: deprecated_member_use
+                      FlatButton(
+                          child: Row(
+                            children: [
+                              Icon(Icons.mail_outline),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                'news'.tr,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          onPressed: () {}),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
-          SizedBox(
-            width: 12,
-          ),
-          Icon(Icons.mail_outline),
-          SizedBox(
-            width: 8,
-          ),
-          Text(
-            'news'.tr,
-            style: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(
-            width: 100,
-          ),
+          //SizedBox(
+          //width: 100,
+          // ),
           topMenuSeeting(),
-          //Icon(Icons.settings),
+          //Align(
+          // alignment: Alignment.centerRight,
+          //child: Icon(Icons.settings),
+          //),
         ],
       ),
     );
   }
 
   Widget topMenuSeeting() {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Icon(Icons.settings),
-        ],
+    return Align(
+      alignment: Alignment.centerRight,
+      child: ButtonTheme(
+        buttonColor: Colors.white,
+        shape: RoundedRectangleBorder(
+          side: BorderSide(color: Colors.transparent),
+        ),
+        // ignore: deprecated_member_use
+        child: FlatButton(
+            child: Row(
+              children: [
+                Icon(Icons.settings),
+              ],
+            ),
+            onPressed: () {}),
       ),
     );
   }
