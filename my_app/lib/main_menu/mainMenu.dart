@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/demo_ui/startbuckUI/startbuckHome.dart';
 import 'package:my_app/demo_ui/work_ui/home_ui.dart';
 import 'package:my_app/pets/petList.dart';
 import 'package:my_app/shop/shopList.dart';
+import 'package:get/get.dart';
 
 class MainMenu extends StatefulWidget {
   @override
@@ -55,6 +57,19 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
+  Widget showListMenuUIStarbucks() {
+    return ListTile(
+      leading: Icon(Icons.pets, size: 36.0, color: Colors.blue.shade600),
+      title: Text('startbucks'.tr),
+      onTap: () {
+        MaterialPageRoute materialPageRoute = MaterialPageRoute(
+            builder: (BuildContext context) => StartBuckUI());
+        Navigator.of(context).push(materialPageRoute);
+        // Navigator.of(context).pop();
+      },
+    );
+  }
+
   Widget showName(String username) {
     return Text(
       'Name Customer : $username',
@@ -95,6 +110,7 @@ class _MainMenuState extends State<MainMenu> {
         showListMenuPets(),
         showListMenuSales(),
         showListMenuUI(),
+        showListMenuUIStarbucks(),
       ],
     ));
   }
