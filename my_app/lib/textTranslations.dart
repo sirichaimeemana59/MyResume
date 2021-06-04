@@ -27,6 +27,10 @@ class TextTranslations extends Translations {
           'order': 'Order',
           'stores': 'Stores',
           'pay': 'Payment',
+          'add_money': 'Add money',
+          'startbuck_card': 'Startbucks Cards',
+          'anotherCard': 'OTHER CARDS',
+          'addcard': 'Add a new card',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -53,6 +57,10 @@ class TextTranslations extends Translations {
           'order': 'ออเดอร์',
           'stores': 'ร้าน',
           'pay': 'ชำระเงิน',
+          'add_money': 'เติมเงินในบัตร',
+          'startbuck_card': 'บัตรสตาร์บัคส์ การ์ด',
+          'anotherCard': 'บัตรอื่น',
+          'addcard': 'เพิ่มบัตรใหม่',
         }
       };
 }
