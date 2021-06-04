@@ -7,6 +7,7 @@ import 'package:my_app/demo_ui/startbuckUI/componentNavigation.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class StartBuckCard extends StatefulWidget {
   const StartBuckCard({Key key}) : super(key: key);
@@ -252,7 +253,17 @@ class _StartBuckCardState extends State<StartBuckCard> {
         children: [
           // ignore: deprecated_member_use
           FlatButton(
-            onPressed: () async => _pickImageFromCamera(),
+            onPressed: () async {
+              var status = await Permission.photos.status;
+              //print(status.toString());
+              if (status.isGranted) {
+                _pickImageFromCamera();
+                // } else if (status.isDenied) {
+                //   _pickImageFromCamera();
+              } else {
+                print('Error');
+              }
+            },
             child: DottedBorder(
               borderType: BorderType.RRect,
               dashPattern: [10, 3],
@@ -295,6 +306,7 @@ class _StartBuckCardState extends State<StartBuckCard> {
   Future<void> _pickImageFromCamera() async {
     final PickedFile pickedFile =
         await _picker.getImage(source: ImageSource.camera);
-    setState(() => this._imageFile = File(pickedFile.path));
+    File(pickedFile.path);
+    //setState(() => this._imageFile = File(pickedFile.path));
   }
 }
