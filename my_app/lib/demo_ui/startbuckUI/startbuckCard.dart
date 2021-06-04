@@ -246,48 +246,49 @@ class _StartBuckCardState extends State<StartBuckCard> {
   Widget getCardOther() {
     return Container(
       padding: EdgeInsets.only(left: 16),
-      child: Flexible(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // ignore: deprecated_member_use
-            FlatButton(
-              onPressed: () async => _pickImageFromCamera(),
-              child: DottedBorder(
-                dashPattern: [10, 3],
-                color: HexColor('#B1B1B1'),
-                radius: Radius.circular(6),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: HexColor('#EAEAEA'),
-                    borderRadius: BorderRadius.circular(6),
-                  ),
-                  //width: 159,
-                  height: 99,
-                  padding: EdgeInsets.all(20),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.add,
+      //child: Flexible(
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ignore: deprecated_member_use
+          FlatButton(
+            onPressed: () async => _pickImageFromCamera(),
+            child: DottedBorder(
+              borderType: BorderType.RRect,
+              dashPattern: [10, 3],
+              color: HexColor('#B1B1B1'),
+              radius: Radius.circular(6),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: HexColor('#EAEAEA'),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                //width: 159,
+                height: 99,
+                padding: EdgeInsets.all(20),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add,
+                      color: HexColor('#8B8B8B'),
+                    ),
+                    SizedBox(
+                      width: 8,
+                    ),
+                    Text(
+                      'addcard'.tr,
+                      style: TextStyle(
                         color: HexColor('#8B8B8B'),
                       ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        'addcard'.tr,
-                        style: TextStyle(
-                          color: HexColor('#8B8B8B'),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
+      //),
     );
   }
 
