@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
+import 'componentNavigation.dart';
+
 class StartBuckUI extends StatefulWidget {
   @override
   _StartBuckUIState createState() => _StartBuckUIState();
@@ -83,78 +85,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            ButtonTheme(
-              padding: EdgeInsets.only(top: 5),
-              child: Row(
-                children: [
-                  // ignore: deprecated_member_use
-                  FlatButton(
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.home,
-                          color: HexColor('#00B06B'),
-                        ),
-                        Text('home'.tr),
-                      ],
-                    ),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  // ignore: deprecated_member_use
-                  FlatButton(
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.credit_card,
-                          // color: Colors.transparent,
-                        ),
-                        Text('card'.tr),
-                      ],
-                    ),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  // ignore: deprecated_member_use
-                  FlatButton(
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.online_prediction_rounded,
-                          //color: HexColor('#00B06B'),
-                        ),
-                        Text('order'.tr),
-                      ],
-                    ),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    width: 4,
-                  ),
-                  // ignore: deprecated_member_use
-                  FlatButton(
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.store,
-                          //color: HexColor('#00B06B'),
-                        ),
-                        Text('stores'.tr),
-                      ],
-                    ),
-                    color: Colors.white,
-                    onPressed: () {},
-                  ),
-                ],
-              ),
-            ),
+            MenuNavigation(),
           ],
         ),
       ),
@@ -167,24 +98,6 @@ class _StartBuckUIState extends State<StartBuckUI> {
         backgroundColor: HexColor('#00B06B'),
       ),
     );
-    // floatingActionButton: FloatingActionButton(
-    //   mini: this.isBlank,
-    //   backgroundColor: HexColor('#00B06B'),
-    //   child: Container(
-    //     width: MediaQuery.of(context).size.width,
-    //     height: MediaQuery.of(context).size.height,
-    //     child: Column(
-    //       mainAxisAlignment: MainAxisAlignment.center,
-    //       children: [
-    //         Text('pay'.tr),
-    //       ],
-    //     ),
-    //   ),
-    //   onPressed: () {
-    //     //print('object');
-    //   },
-    // ),
-    //);
   }
 
   Widget textWellcome() {
@@ -294,22 +207,24 @@ class _StartBuckUIState extends State<StartBuckUI> {
   }
 
   Widget topMenuSeeting() {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: ButtonTheme(
-        buttonColor: Colors.white,
-        shape: RoundedRectangleBorder(
-          side: BorderSide(color: Colors.transparent),
-        ),
-        // ignore: deprecated_member_use
-        child: FlatButton(
+    return ButtonTheme(
+      buttonColor: Colors.white,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: Colors.transparent),
+      ),
+      // ignore: deprecated_member_use
+      child: FlatButton(
+          child: Align(
+            alignment: Alignment.centerRight,
             child: Row(
               children: [
-                Icon(Icons.settings),
+                Icon(
+                  Icons.settings,
+                ),
               ],
             ),
-            onPressed: () {}),
-      ),
+          ),
+          onPressed: () {}),
     );
   }
 
@@ -358,6 +273,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
   Widget rangeBlance() {
     return Container(
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Text(
             '92' + ' / ',
