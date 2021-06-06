@@ -31,6 +31,9 @@ class TextTranslations extends Translations {
           'startbuck_card': 'Startbucks Cards',
           'anotherCard': 'OTHER CARDS',
           'addcard': 'Add a new card',
+          'addcardNew': 'Add card',
+          'numberCard': 'Starbucks Card number',
+          'scs': 'Security code',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -61,6 +64,9 @@ class TextTranslations extends Translations {
           'startbuck_card': 'บัตรสตาร์บัคส์ การ์ด',
           'anotherCard': 'บัตรอื่น',
           'addcard': 'เพิ่มบัตรใหม่',
+          'addcardNew': 'เพิ่มบัตร',
+          'numberCard': 'หมายเลขบัตรสตาร์บัค การ์ด',
+          'scs': 'รหัสความปลอดภัยของบัตร (csc)',
         }
       };
 }

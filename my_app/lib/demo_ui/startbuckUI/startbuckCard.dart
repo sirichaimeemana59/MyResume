@@ -7,6 +7,7 @@ import 'package:my_app/demo_ui/startbuckUI/componentNavigation.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_app/demo_ui/startbuckUI/startbuckAddCard.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class StartBuckCard extends StatefulWidget {
@@ -38,6 +39,25 @@ class _StartBuckCardState extends State<StartBuckCard> {
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
         elevation: 0,
+        actions: [
+          Container(
+            padding: EdgeInsets.only(right: 0),
+            child: ButtonTheme(
+              // ignore: deprecated_member_use
+              child: FlatButton(
+                onPressed: () {
+                  MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                      builder: (BuildContext context) => StarBucksAddCard());
+                  Navigator.of(context).push(materialPageRoute);
+                },
+                child: Icon(
+                  Icons.add_circle,
+                  color: HexColor('#5E5E5E'),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -254,15 +274,19 @@ class _StartBuckCardState extends State<StartBuckCard> {
           // ignore: deprecated_member_use
           FlatButton(
             onPressed: () async {
-              var status = await Permission.photos.status;
-              //print(status.toString());
-              if (status.isGranted) {
-                _pickImageFromCamera();
-                // } else if (status.isDenied) {
-                //   _pickImageFromCamera();
-              } else {
-                print('Error');
-              }
+              MaterialPageRoute materialPageRoute = MaterialPageRoute(
+                  builder: (BuildContext context) => StarBucksAddCard());
+              Navigator.of(context).push(materialPageRoute);
+
+              //var status = await Permission.photos.status;
+              //print(status.isGranted.toString());
+              // if (status.isGranted) {
+              // _pickImageFromCamera();
+              // } else if (status.isDenied) {
+              //   _pickImageFromCamera();
+              // } else {
+              //  print('Error');
+              //}
             },
             child: DottedBorder(
               borderType: BorderType.RRect,

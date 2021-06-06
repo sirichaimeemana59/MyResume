@@ -81,7 +81,7 @@ class _MenuNavigationState extends State<MenuNavigation> {
                                       builder: (BuildContext context) =>
                                           navigation.route);
                               Navigator.of(context).push(materialPageRoute);
-                              print(selectedIndex.toString());
+                              //print(selectedIndex.toString());
                             },
                           ),
                         ],
