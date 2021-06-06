@@ -279,7 +279,6 @@ class _StartBuckCardState extends State<StartBuckCard> {
           // ignore: deprecated_member_use
           FlatButton(
             onPressed: () async {
-              print('object');
               MaterialPageRoute materialPageRoute = MaterialPageRoute(
                   builder: (BuildContext context) => StarBucksAddCard());
               Navigator.of(context).push(materialPageRoute);
