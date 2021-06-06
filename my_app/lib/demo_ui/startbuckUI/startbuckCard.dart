@@ -26,6 +26,11 @@ class _StartBuckCardState extends State<StartBuckCard> {
   File _imageFile;
   // ignore: unused_field
   final _picker = ImagePicker();
+  PermissionStatus _permissionStatus;
+  void onLayoutDone(Duration timeStamp) async {
+    _permissionStatus = await Permission.camera.status;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -274,12 +279,13 @@ class _StartBuckCardState extends State<StartBuckCard> {
           // ignore: deprecated_member_use
           FlatButton(
             onPressed: () async {
+              print('object');
               MaterialPageRoute materialPageRoute = MaterialPageRoute(
                   builder: (BuildContext context) => StarBucksAddCard());
               Navigator.of(context).push(materialPageRoute);
 
-              //var status = await Permission.photos.status;
-              //print(status.isGranted.toString());
+              //await Permission.contacts.request().isGranted;
+              //print(status.toString());
               // if (status.isGranted) {
               // _pickImageFromCamera();
               // } else if (status.isDenied) {
