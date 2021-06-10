@@ -34,6 +34,11 @@ class TextTranslations extends Translations {
           'addcardNew': 'Add card',
           'numberCard': 'Starbucks Card number',
           'scs': 'Security code',
+          'text_order': 'Mobile Order & Pay',
+          'menu': 'Menu',
+          'featured': 'Featured',
+          'previous': 'Previous',
+          'see_all': 'See all',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -67,6 +72,11 @@ class TextTranslations extends Translations {
           'addcardNew': 'เพิ่มบัตร',
           'numberCard': 'หมายเลขบัตรสตาร์บัค การ์ด',
           'scs': 'รหัสความปลอดภัยของบัตร (csc)',
+          'text_order': 'Mobile Order & Pay',
+          'menu': 'เมนู',
+          'featured': 'แนะนำ',
+          'previous': 'ครั้งล่าสุด',
+          'see_all': 'ดูทั้งหมด',
         }
       };
 }
