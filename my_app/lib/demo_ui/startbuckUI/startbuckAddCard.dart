@@ -39,18 +39,18 @@ class _StarBucksAddCardState extends State<StarBucksAddCard> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        //padding: EdgeInsets.only(right: 8),
-        width: MediaQuery.of(context).size.width,
-        height: 55,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            MenuNavigation(),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   //padding: EdgeInsets.only(right: 8),
+      //   width: MediaQuery.of(context).size.width,
+      //   height: 55,
+      //   color: Colors.white,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: [
+      //       MenuNavigation(),
+      //     ],
+      //   ),
+      // ),
       floatingActionButton: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
