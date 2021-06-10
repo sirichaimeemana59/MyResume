@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hexcolor/hexcolor.dart';
 
-import 'componentNavigation.dart';
-
 class StartBuckUI extends StatefulWidget {
   @override
   _StartBuckUIState createState() => _StartBuckUIState();
@@ -77,18 +75,18 @@ class _StartBuckUIState extends State<StartBuckUI> {
           )),
         ),
       ),
-      bottomNavigationBar: Container(
-        //padding: EdgeInsets.only(right: 8),
-        width: MediaQuery.of(context).size.width,
-        height: 55,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            MenuNavigation(),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   //padding: EdgeInsets.only(right: 8),
+      //   width: MediaQuery.of(context).size.width,
+      //   height: 55,
+      //   color: Colors.white,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: [
+      //       MenuNavigation(),
+      //     ],
+      //   ),
+      // ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           // Add your onPressed code here!

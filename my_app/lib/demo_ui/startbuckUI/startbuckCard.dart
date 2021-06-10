@@ -3,12 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 //import 'package:flutter/services.dart';
 import 'package:hexcolor/hexcolor.dart';
-import 'package:my_app/demo_ui/startbuckUI/componentNavigation.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_app/demo_ui/startbuckUI/startbuckAddCard.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class StartBuckCard extends StatefulWidget {
   const StartBuckCard({Key key}) : super(key: key);
@@ -26,9 +24,9 @@ class _StartBuckCardState extends State<StartBuckCard> {
   File _imageFile;
   // ignore: unused_field
   final _picker = ImagePicker();
-  PermissionStatus _permissionStatus;
+  //PermissionStatus _permissionStatus;
   void onLayoutDone(Duration timeStamp) async {
-    _permissionStatus = await Permission.camera.status;
+    // _permissionStatus = await Permission.camera.status;
     setState(() {});
   }
 
@@ -82,18 +80,18 @@ class _StartBuckCardState extends State<StartBuckCard> {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        //padding: EdgeInsets.only(right: 8),
-        width: MediaQuery.of(context).size.width,
-        height: 55,
-        color: Colors.white,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            MenuNavigation(),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: Container(
+      //   //padding: EdgeInsets.only(right: 8),
+      //   width: MediaQuery.of(context).size.width,
+      //   height: 55,
+      //   color: Colors.white,
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //     children: [
+      //       MenuNavigation(),
+      //     ],
+      //   ),
+      // ),
       floatingActionButton: Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
@@ -332,10 +330,10 @@ class _StartBuckCardState extends State<StartBuckCard> {
     );
   }
 
-  Future<void> _pickImageFromCamera() async {
-    final PickedFile pickedFile =
-        await _picker.getImage(source: ImageSource.camera);
-    File(pickedFile.path);
-    //setState(() => this._imageFile = File(pickedFile.path));
-  }
+  // Future<void> _pickImageFromCamera() async {
+  //   final PickedFile pickedFile =
+  //       await _picker.getImage(source: ImageSource.camera);
+  //   File(pickedFile.path);
+  //   //setState(() => this._imageFile = File(pickedFile.path));
+  // }
 }

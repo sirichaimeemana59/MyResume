@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/demo_ui/startbuckUI/startbuckHome.dart';
+import 'package:my_app/demo_ui/startbuckUI/mainButtonMenu.dart';
 import 'package:my_app/demo_ui/work_ui/home_ui.dart';
 import 'package:my_app/pets/petList.dart';
 import 'package:my_app/shop/shopList.dart';
@@ -63,7 +63,7 @@ class _MainMenuState extends State<MainMenu> {
       title: Text('startbucks'.tr),
       onTap: () {
         MaterialPageRoute materialPageRoute = MaterialPageRoute(
-            builder: (BuildContext context) => StartBuckUI());
+            builder: (BuildContext context) => MainButtonMenu());
         Navigator.of(context).push(materialPageRoute);
         // Navigator.of(context).pop();
       },

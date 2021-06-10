@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:my_app/demo_ui/startbuckUI/componentNavigation.dart';
 
 class StartBuckStore extends StatefulWidget {
   @override
@@ -22,7 +21,7 @@ class _StartBuckStoreState extends State<StartBuckStore> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            MenuNavigation(),
+            // MenuNavigation(),
           ],
         ),
       ),
