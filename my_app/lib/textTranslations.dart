@@ -39,6 +39,10 @@ class TextTranslations extends Translations {
           'featured': 'Featured',
           'previous': 'Previous',
           'see_all': 'See all',
+          'pickup': 'Pickup at',
+          'select_pickup': 'Select Store',
+          'view_map': 'View Map',
+          'nearby': 'NEARBY',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -77,6 +81,10 @@ class TextTranslations extends Translations {
           'featured': 'แนะนำ',
           'previous': 'ครั้งล่าสุด',
           'see_all': 'ดูทั้งหมด',
+          'pickup': 'สถานที่รับ',
+          'select_pickup': 'เลือกสาขา',
+          'view_map': 'ดูแผนที่',
+          'nearby': 'ร้านใกล้เคียง',
         }
       };
 }

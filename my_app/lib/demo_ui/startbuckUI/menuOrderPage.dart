@@ -73,8 +73,6 @@ class _MenuOrderPageState extends State<MenuOrderPage> {
       child: Column(
         children: [
           ListView.builder(
-              //scrollDirection: Axis.horizontal,
-
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               itemCount: productList.length,
