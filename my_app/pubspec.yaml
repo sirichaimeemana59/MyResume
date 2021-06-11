@@ -42,6 +42,7 @@ dependencies:
   hexcolor: ^2.0.3
   dotted_border: ^2.0.0
   permission_handler: ^8.0.1
+  barcode: ^2.1.0
   #multi_image_picker: ^4.8.0
   #image_picker: ^0.7.4
   #image_cropper: ^1.4.0

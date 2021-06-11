@@ -43,6 +43,7 @@ class TextTranslations extends Translations {
           'select_pickup': 'Select Store',
           'view_map': 'View Map',
           'nearby': 'NEARBY',
+          'pay_in_store': 'Pay in store',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -85,6 +86,7 @@ class TextTranslations extends Translations {
           'select_pickup': 'เลือกสาขา',
           'view_map': 'ดูแผนที่',
           'nearby': 'ร้านใกล้เคียง',
+          'pay_in_store': 'ชำระเงิน',
         }
       };
 }

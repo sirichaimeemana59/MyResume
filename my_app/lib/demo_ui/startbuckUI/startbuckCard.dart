@@ -6,6 +6,7 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:my_app/demo_ui/startbuckUI/starBuckCardDetail.dart';
 import 'package:my_app/demo_ui/startbuckUI/startbuckAddCard.dart';
 
 class StartBuckCard extends StatefulWidget {
@@ -32,11 +33,6 @@ class _StartBuckCardState extends State<StartBuckCard> {
 
   @override
   Widget build(BuildContext context) {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    //   // systemNavigationBarColor: HexColor('#05B06C'),
-    //   statusBarColor: Colors.black,
-    // ));
-    //onClickMenu(1);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -234,18 +230,26 @@ class _StartBuckCardState extends State<StartBuckCard> {
   }
 
   Widget getCard() {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("images/strcard.png"),
-          fit: BoxFit.fill,
+    // ignore: deprecated_member_use
+    return FlatButton(
+      onPressed: () {
+        MaterialPageRoute materialPageRoute = MaterialPageRoute(
+            builder: (BuildContext context) => CardDetailUI());
+        Navigator.of(context).push(materialPageRoute);
+      },
+      child: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("images/strcard.png"),
+            fit: BoxFit.fill,
+          ),
+          color: Colors.black,
+          borderRadius: BorderRadius.circular(12),
         ),
-        color: Colors.black,
-        borderRadius: BorderRadius.circular(12),
+        //padding: EdgeInsets.all(20),
+        height: 197,
+        width: MediaQuery.of(context).size.width - 28,
       ),
-      //padding: EdgeInsets.all(20),
-      height: 197,
-      width: MediaQuery.of(context).size.width - 28,
     );
   }
 
