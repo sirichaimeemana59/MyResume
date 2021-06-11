@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
 import 'package:barcode/barcode.dart';
+import 'package:intl/intl.dart';
 
 class CardDetailUI extends StatefulWidget {
   @override
@@ -80,13 +81,15 @@ class _CardDetailUIState extends State<CardDetailUI> {
   }
 
   Widget detailCard() {
+    var now = DateTime.now();
+    String formattedDate = DateFormat('yyyy-MM-dd').format(now);
     return Container(
       padding: EdgeInsets.only(left: 24, top: 6, right: 18),
       child: Column(
         children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 width: 145,
@@ -100,40 +103,33 @@ class _CardDetailUIState extends State<CardDetailUI> {
                   borderRadius: BorderRadius.circular(5),
                 ),
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '฿15.00',
-                    style: TextStyle(
-                      fontSize: 26,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
+              SizedBox(
+                width: 28,
+              ),
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '฿15.00',
+                      style: TextStyle(
+                        fontSize: 26,
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  textTime(),
-                ],
+                    Text(
+                      formattedDate,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: HexColor('#4C4C4C'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           )
-        ],
-      ),
-    );
-  }
-
-  Widget textTime() {
-    var now = DateTime.now();
-    return Container(
-      child: Row(
-        children: [
-          Row(
-            children: [
-              Text(
-                now.toString(),
-                style: TextStyle(fontSize: 16, color: HexColor('#4C4C4C')),
-              ),
-            ],
-          ),
         ],
       ),
     );
