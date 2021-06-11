@@ -1,20 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:get/get.dart';
 
 class StartBuckStore extends StatefulWidget {
   @override
   _StartBuckStoreState createState() => _StartBuckStoreState();
 }
 
+class ListMenu {
+  String title;
+  String icon;
+  ListMenu(this.title, this.icon);
+}
+
 class _StartBuckStoreState extends State<StartBuckStore> {
+  List<ListMenu> listMenuSlider = [
+    ListMenu('news_menu'.tr, 'ac_unit'),
+    ListMenu('promotion_menu'.tr, 'promotion'),
+    ListMenu('benefit_ment'.tr, 'new'),
+    ListMenu('gift_menu'.tr, 'new'),
+    ListMenu('event_menu'.tr, 'new'),
+    ListMenu('servey_menu'.tr, 'new'),
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: SingleChildScrollView(
       child: Container(
-        child: Column(
+        child: Stack(
           children: [
-            cardprofileDetail(),
+            Column(
+              children: [
+                cardprofileDetail(),
+              ],
+            ),
+            Container(
+              padding: EdgeInsets.only(left: 8, top: 120),
+              child: Row(
+                children: [
+                  topSlideMenu(),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -23,30 +50,19 @@ class _StartBuckStoreState extends State<StartBuckStore> {
 
   Widget cardprofileDetail() {
     return Container(
-        padding: EdgeInsets.only(left: 8, top: 70, bottom: 14, right: 8),
-        color: HexColor('#FFD602'),
-        width: MediaQuery.of(context).size.width,
-        height: 200,
-        child: Stack(
-          children: [
-            Column(
-              //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //crossAxisAlignment: CrossAxisAlignment.end,
-              //children: [
-              //Row(
-              children: [
-                imageProfile(),
-                SizedBox(
-                  height: 20,
-                ),
-                topSlideMenu(),
-                Text('data'),
-              ],
-            ),
-          ],
-          //],
-          //),
-        ));
+      padding: EdgeInsets.only(left: 8, top: 28, bottom: 14, right: 8),
+      color: HexColor('#FFD602'),
+      width: MediaQuery.of(context).size.width,
+      height: 170,
+      child: Column(
+        children: [
+          imageProfile(),
+          SizedBox(
+            height: 20,
+          ),
+        ],
+      ),
+    );
   }
 
   Widget imageProfile() {
@@ -108,9 +124,9 @@ class _StartBuckStoreState extends State<StartBuckStore> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            'ร้านค้าเจริญเล็งพาณิชย์ \n(เล็ง)',
+            'ร้านค้าเจริญเล็งพาณิชย์ (เล็ง)',
             style: TextStyle(
-              fontSize: 18,
+              fontSize: MediaQuery.of(context).size.width * 0.8,
               color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
@@ -130,9 +146,9 @@ class _StartBuckStoreState extends State<StartBuckStore> {
 
   Widget pointProfile() {
     return Container(
-      width: 150,
+      width: 120,
       height: 56,
-      padding: EdgeInsets.only(left: 20, right: 8, top: 9),
+      padding: EdgeInsets.only(left: 10, right: 8, top: 9),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(18),
@@ -170,7 +186,7 @@ class _StartBuckStoreState extends State<StartBuckStore> {
 
   Widget topSlideMenu() {
     return Container(
-      width: MediaQuery.of(context).size.width * 9,
+      width: MediaQuery.of(context).size.width * 0.95,
       height: 120,
       decoration: BoxDecoration(
         color: Colors.white,
@@ -183,12 +199,73 @@ class _StartBuckStoreState extends State<StartBuckStore> {
           )
         ],
       ),
-      child: Expanded(
-          child: Row(
+      child: Column(
         children: [
-          Text('data'),
+          getListMenu(),
         ],
-      )),
+      ),
+    );
+  }
+
+  Widget getListMenu() {
+    return Container(
+      child: Expanded(
+        child: GridView.count(
+          physics: ScrollPhysics(),
+          shrinkWrap: true,
+          scrollDirection: Axis.horizontal,
+          crossAxisCount: 1,
+          children: List.generate(
+            listMenuSlider.length,
+            (index) {
+              ListMenu menuslide = listMenuSlider[index];
+              return Container(
+                padding: EdgeInsets.only(top: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Column(
+                      children: [
+                        Container(
+                          width: 60,
+                          height: 60,
+                          decoration: BoxDecoration(
+                            color: HexColor('#C2DBF9'),
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.ac_unit,
+                                size: 40,
+                                color: HexColor('#4ECAEB'),
+                              )
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          menuslide.title,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              );
+            },
+          ),
+        ),
+      ),
     );
   }
 }

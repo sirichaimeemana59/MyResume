@@ -44,6 +44,12 @@ class TextTranslations extends Translations {
           'view_map': 'View Map',
           'nearby': 'NEARBY',
           'pay_in_store': 'Pay in store',
+          'news_menu': 'News',
+          'promotion_menu': 'Promotion',
+          'benefit_ment': 'Benefit',
+          'gift_menu': 'Gift',
+          'event_menu': 'Event',
+          'servey_menu': 'Survey',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -87,6 +93,12 @@ class TextTranslations extends Translations {
           'view_map': 'ดูแผนที่',
           'nearby': 'ร้านใกล้เคียง',
           'pay_in_store': 'ชำระเงิน',
+          'news_menu': 'ข่าวสารและ\nกิจกรรม',
+          'promotion_menu': 'โปรโมชัน',
+          'benefit_ment': 'ผลตอบแทน',
+          'gift_menu': 'ของรางวัล',
+          'event_menu': 'กิจกรรม',
+          'servey_menu': 'แบบสำรวจ',
         }
       };
 }
