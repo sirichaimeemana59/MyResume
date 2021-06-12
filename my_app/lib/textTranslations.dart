@@ -50,6 +50,9 @@ class TextTranslations extends Translations {
           'gift_menu': 'Gift',
           'event_menu': 'Event',
           'servey_menu': 'Survey',
+          'news_privilege': 'News and Privilege',
+          'benefit_recom': 'Recommended Awards',
+          'trade_now': 'Trade Now',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -99,6 +102,9 @@ class TextTranslations extends Translations {
           'gift_menu': 'ของรางวัล',
           'event_menu': 'กิจกรรม',
           'servey_menu': 'แบบสำรวจ',
+          'news_privilege': 'ข่าวสารและสิทธิพิเศษ',
+          'benefit_recom': 'รางวัลแนะนำ',
+          'trade_now': 'แลกเลย',
         }
       };
 }
