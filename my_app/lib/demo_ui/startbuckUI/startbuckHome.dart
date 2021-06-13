@@ -132,9 +132,10 @@ class _StartBuckUIState extends State<StartBuckUI> {
 
   Widget topMenu() {
     return Container(
-      padding: EdgeInsets.only(left: 15, right: 24),
+      padding: EdgeInsets.only(left: 5, right: 4),
       child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //  mainAxisAlignment: MainAxisAlignment.start,
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Row(
