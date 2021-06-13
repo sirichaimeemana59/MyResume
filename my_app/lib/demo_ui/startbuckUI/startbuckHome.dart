@@ -206,6 +206,7 @@ class _StartBuckUIState extends State<StartBuckUI> {
 
   Widget topMenuSeeting() {
     return ButtonTheme(
+      minWidth: 19,
       buttonColor: Colors.white,
       shape: RoundedRectangleBorder(
         side: BorderSide(color: Colors.transparent),

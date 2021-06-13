@@ -29,7 +29,7 @@ class _AwardUIState extends State<AwardUI> {
       width: MediaQuery.of(context).size.width,
       //padding: EdgeInsets.only(left: 12, top: 10, right: 12),
       height: 300,
-      // color: Colors.black,
+      color: Colors.white,
       child: Column(
         children: [
           benefitBox(),

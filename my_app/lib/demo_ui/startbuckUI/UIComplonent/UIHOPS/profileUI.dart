@@ -46,7 +46,7 @@ class _ProfileUIHOPSState extends State<ProfileUIHOPS> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'ร้านค้าเจริญเล็งพาณิชย์ \n(เล็ง)',
+              'ร้านค้าเจริญ\nเล็งพาณิชย์(เล็ง)',
               style: TextStyle(
                 fontSize: 18,
                 color: Colors.black,

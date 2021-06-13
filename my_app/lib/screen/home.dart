@@ -111,7 +111,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       //สร้าง Object ให้อยู่ใน View
-      body: SafeArea(
+      body:
           //SafeArea เก็บวัตถุได้เพียง 1 ตัว และมีค่าเป็น child
           //child: showAppName(),
           // child: FutureBuilder<UserModel>(
@@ -128,7 +128,7 @@ class _HomeState extends State<Home> {
           //   },
           // ),
           //     //User Column เรียงวัตถุจากบนลงล่าง
-          child: Container(
+          Container(
         decoration: BoxDecoration(
             image: DecorationImage(
           image: AssetImage('images/PetBackground.png'),
@@ -150,14 +150,15 @@ class _HomeState extends State<Home> {
             ],
           ),
         ),
-      )),
-      // end Column
-      //User row เรียงวัตถุจาซ้ายไปขวา
-      //     child: Row(
-      //   children: [showAppName(), showAppName(), showAppName(), showAppName()],
-      // )),
-      // end row
+      ),
     );
+    // end Column
+    //User row เรียงวัตถุจาซ้ายไปขวา
+    //     child: Row(
+    //   children: [showAppName(), showAppName(), showAppName(), showAppName()],
+    // )),
+    // end row
+    ;
   }
 
   Widget textHelp() {
