@@ -1,27 +1,35 @@
 //Create Provider
 import 'package:flutter/foundation.dart';
+import 'package:my_app/database/transection_db.dart';
 import 'package:my_app/modelProviders/model_providers.dart';
 
 //ChangeNotifier แจ้งเตือนเมื่อมีการเปลี่ยนแปลงข้อมูล
 class TransectionProvider with ChangeNotifier {
   //ตัวอย่างข้อมูล
-  List<Transection> transections = [
-    Transection(title: 'หนังสือ', amount: 100, date: DateTime.now()),
-    Transection(title: 'กาเกง', amount: 200, date: DateTime.now()),
-    Transection(title: 'เสื้อผ้า', amount: 300, date: DateTime.now()),
-    Transection(title: 'ถุงเท้า', amount: 50, date: DateTime.now()),
-    Transection(title: 'รองเท้า', amount: 450, date: DateTime.now()),
-  ];
+  List<Transections> transections = [];
 
   //สร้าง function เพื่อให้บริการดึวข้อมูลไปใช้งาน
   //ส่งออกไปเป็น List
-  List<Transection> getTransection() {
+  List<Transections> getTransection() {
     return transections;
   }
 
-  //สร้าง function เพื่อให้บริการเพิ่มข้อมูลไปใน List
+  //ดึงข้อมูลเมื่อเริ้่มต้น App
+  void initData() async {
+    var db =
+        TransectionDB(dbName: "transection.db"); //Call Funciton and create DB
+    transections = await db.loadAllData(); //Query Data Before Insert Data
+    notifyListeners(); //แจ้งเตือน  Consumenr เมื่อมีการเพิ่มข้อมูล
+  }
 
-  addTransection(Transection statement) {
-    transections.add(statement);
+  //สร้าง function เพื่อให้บริการเพิ่มข้อมูลไปใน List
+  void addTransection(Transections statement) async {
+    //Create database
+    var db =
+        TransectionDB(dbName: "transection.db"); //Call Funciton and create DB
+    await db.InsertData(statement); //Save Data
+    transections = await db.loadAllData(); //Query Data Before Insert Data
+    //transections.insert(0, statement); //Insert data to list after index 0
+    notifyListeners(); //แจ้งเตือน  Consumenr เมื่อมีการเพิ่มข้อมูล
   }
 }

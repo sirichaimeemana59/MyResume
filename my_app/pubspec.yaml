@@ -44,6 +44,12 @@ dependencies:
   permission_handler: ^8.0.1
   barcode: ^2.1.0
   provider: ^5.0.0
+  intl: ^0.17.0
+  #Packget Locate Database
+  sembast: ^3.1.0+2
+  path_provider: ^2.0.2
+  path: ^1.8.0
+  #End Packget Locate Database
   #multi_image_picker: ^4.8.0
   #image_picker: ^0.7.4
   #image_cropper: ^1.4.0
