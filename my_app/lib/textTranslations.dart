@@ -53,6 +53,7 @@ class TextTranslations extends Translations {
           'news_privilege': 'News and Privilege',
           'benefit_recom': 'Recommended Awards',
           'trade_now': 'Trade Now',
+          'providers': 'Providers'
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -105,6 +106,7 @@ class TextTranslations extends Translations {
           'news_privilege': 'ข่าวสารและสิทธิพิเศษ',
           'benefit_recom': 'รางวัลแนะนำ',
           'trade_now': 'แลกเลย',
+          'providers': 'Providers'
         }
       };
 }
