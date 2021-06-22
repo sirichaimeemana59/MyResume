@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:my_app/providers/transection/transection_providers.dart';
 import 'package:my_app/screen/home.dart';
+import 'package:my_app/startbucksProviders/startBucksProvider.dart';
 import 'package:my_app/textTranslations.dart';
 import 'package:provider/provider.dart';
 //import 'package:flutter_openvpn/flutter_openvpn.dart';
@@ -25,6 +26,9 @@ class Myapp extends StatelessWidget {
         //ประกาศเรียกใช้ Provider
         ChangeNotifierProvider(create: (context) {
           return TransectionProvider();
+        }),
+        ChangeNotifierProvider(create: (context) {
+          return StartBucksProviders();
         }), //รับค่า Provider ประกาศซ้ำเมื่อมีหลายตัว
       ],
       child: GetMaterialApp(

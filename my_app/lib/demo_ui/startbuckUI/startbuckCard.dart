@@ -8,6 +8,8 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:my_app/demo_ui/startbuckUI/starBuckCardDetail.dart';
 import 'package:my_app/demo_ui/startbuckUI/startbuckAddCard.dart';
+import 'package:my_app/startbucksProviders/startBucksProvider.dart';
+import 'package:provider/provider.dart';
 
 class StartBuckCard extends StatefulWidget {
   const StartBuckCard({Key key}) : super(key: key);
@@ -70,7 +72,7 @@ class _StartBuckCardState extends State<StartBuckCard> {
                 textCurren(),
                 getCard(),
                 textAnotherCard(),
-                getCardOther(),
+                createCardformList(),
               ],
             ),
           ),
@@ -284,16 +286,6 @@ class _StartBuckCardState extends State<StartBuckCard> {
               MaterialPageRoute materialPageRoute = MaterialPageRoute(
                   builder: (BuildContext context) => StarBucksAddCard());
               Navigator.of(context).push(materialPageRoute);
-
-              //await Permission.contacts.request().isGranted;
-              //print(status.toString());
-              // if (status.isGranted) {
-              // _pickImageFromCamera();
-              // } else if (status.isDenied) {
-              //   _pickImageFromCamera();
-              // } else {
-              //  print('Error');
-              //}
             },
             child: DottedBorder(
               borderType: BorderType.RRect,
@@ -334,10 +326,66 @@ class _StartBuckCardState extends State<StartBuckCard> {
     );
   }
 
-  // Future<void> _pickImageFromCamera() async {
-  //   final PickedFile pickedFile =
-  //       await _picker.getImage(source: ImageSource.camera);
-  //   File(pickedFile.path);
-  //   //setState(() => this._imageFile = File(pickedFile.path));
-  // }
+  Widget createCardformList() {
+    return Consumer(
+      builder:
+          (context, StartBucksProviders startBucksProviders, Widget child) {
+        var count = startBucksProviders.cardStarbucksList.length;
+        if (count < 0) {
+          return Center(
+            child: Text(
+              "ไม่พบข้อมูล",
+              style: TextStyle(fontSize: 35),
+            ),
+          );
+        } else {
+          return Container(
+            padding: EdgeInsets.only(left: 16),
+            child: GridView.count(
+              shrinkWrap: true,
+              physics: ScrollPhysics(),
+              crossAxisCount: 2,
+              childAspectRatio: 1.5,
+              children: List.generate(
+                count,
+                (index) {
+                  return Center(
+                    child: Row(
+                      children: [
+                        Container(
+                          child: DottedBorder(
+                            borderType: BorderType.RRect,
+                            dashPattern: [10, 3],
+                            color: HexColor('#B1B1B1'),
+                            radius: Radius.circular(6),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: HexColor('#EAEAEA'),
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              width: 155,
+                              height: 180,
+                              //padding: EdgeInsets.all(20),
+                              child: Column(
+                                children: [
+                                  Image.asset(
+                                    "images/strcard.png",
+                                    fit: BoxFit.fill,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          );
+        }
+      },
+    );
+  }
 }

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
 import 'package:my_app/demo_ui/startbuckUI/componentNavigation.dart';
+import 'package:my_app/startbucksProviders/cardModelProvider.dart';
+import 'package:my_app/startbucksProviders/startBucksProvider.dart';
+import 'package:provider/provider.dart';
 
 class StarBucksAddCard extends StatefulWidget {
   @override
@@ -11,6 +14,9 @@ class StarBucksAddCard extends StatefulWidget {
 }
 
 class _StarBucksAddCardState extends State<StarBucksAddCard> {
+  final formKey = GlobalKey<FormState>();
+  final cardNumber = TextEditingController();
+  final verifyNumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +63,25 @@ class _StarBucksAddCardState extends State<StarBucksAddCard> {
           children: [
             FloatingActionButton.extended(
               onPressed: () {
-                // Add your onPressed code here!
+                //if (formKey.currentState.validate()) {
+                // formKey.currentState.save();
+                //} else {}
+                var cardNo = cardNumber.text;
+                var codeVer = verifyNumber.text;
+                var date = DateTime.now();
+
+                CardModersStarbucks statement = CardModersStarbucks(
+                  cardNumber: cardNo,
+                  verifyCard: codeVer,
+                  date: date,
+                );
+                var provider =
+                    Provider.of<StartBucksProviders>(context, listen: false);
+
+                provider.addCardStarbucksList(statement);
+                Navigator.pop(context);
+                // StartBucksProviders transectionProvider = StartBucksProviders();
+                //print(transectionProvider.cardStarbucksList.first);
               },
               label: Text(
                 'addcardNew'.tr,
@@ -160,7 +184,7 @@ class _StarBucksAddCardState extends State<StarBucksAddCard> {
               ),
               Container(
                 padding: EdgeInsets.only(
-                  top: 162,
+                  top: 170,
                 ),
                 child: outlineGold(),
               ),
@@ -184,21 +208,40 @@ class _StarBucksAddCardState extends State<StarBucksAddCard> {
 
   Widget textNumberCard() {
     return TextFormField(
+      autofocus: true,
+      controller: cardNumber,
       decoration: InputDecoration(
         labelText: 'numberCard'.tr,
         labelStyle:
             TextStyle(color: HexColor('#E3E3E3'), fontWeight: FontWeight.bold),
+        helperText: 'place_key_card_number'.tr,
       ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'place_key_card_number'.tr;
+        } else {
+          return null;
+        }
+      },
     );
   }
 
   Widget textNumberCardCSC() {
     return TextFormField(
+      controller: verifyNumber,
       decoration: InputDecoration(
         labelText: 'scs'.tr,
         labelStyle:
             TextStyle(color: HexColor('#E3E3E3'), fontWeight: FontWeight.bold),
+        helperText: 'place_key_card_verify'.tr,
       ),
+      validator: (String value) {
+        if (value.isEmpty) {
+          return 'place_key_card_verify'.tr;
+        } else {
+          return null;
+        }
+      },
     );
   }
 }
