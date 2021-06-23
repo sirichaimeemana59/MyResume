@@ -22,7 +22,7 @@ class _MainScreenProvidersState extends State<MainScreenProviders> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+       // automaticallyImplyLeading: false,
         backgroundColor: Colors.blue,
         elevation: 0,
         actions: [

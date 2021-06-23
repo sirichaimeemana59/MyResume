@@ -35,11 +35,14 @@ class TransectionDB {
     var store = intMapStoreFactory.store("expense");
 
     //Insert data format Json
-    var keyID = store.add(db, {
-      "title": statement.title,
-      "amount": statement.amount,
-      "date": statement.date.toIso8601String(),
-    });
+    var keyID = store.add(
+      db,
+      {
+        "title": statement.title,
+        "amount": statement.amount,
+        "date": statement.date.toIso8601String(),
+      },
+    );
     db.close();
     return keyID;
   }

@@ -1,9 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:get/get.dart';
-import 'package:my_app/demo_ui/startbuckUI/componentNavigation.dart';
 import 'package:my_app/startbucksProviders/cardModelProvider.dart';
 import 'package:my_app/startbucksProviders/startBucksProvider.dart';
 import 'package:provider/provider.dart';
@@ -28,19 +25,22 @@ class _StarBucksAddCardState extends State<StarBucksAddCard> {
         backgroundColor: Colors.white,
         elevation: 0,
       ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Container(
-            //padding: EdgeInsets.only(left: 20, right: 18),
-            child: Column(
-              children: [
-                textAddCard(),
-                outlineShadow(),
-                SizedBox(
-                  height: 40,
-                ),
-                getCard(),
-              ],
+      body: Form(
+        key: formKey,
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Container(
+              //padding: EdgeInsets.only(left: 20, right: 18),
+              child: Column(
+                children: [
+                  textAddCard(),
+                  outlineShadow(),
+                  SizedBox(
+                    height: 40,
+                  ),
+                  getCard(),
+                ],
+              ),
             ),
           ),
         ),
@@ -63,23 +63,23 @@ class _StarBucksAddCardState extends State<StarBucksAddCard> {
           children: [
             FloatingActionButton.extended(
               onPressed: () {
-                //if (formKey.currentState.validate()) {
-                // formKey.currentState.save();
-                //} else {}
-                var cardNo = cardNumber.text;
-                var codeVer = verifyNumber.text;
-                var date = DateTime.now();
+                if (formKey.currentState.validate()) {
+                  formKey.currentState.save();
+                  var cardNo = cardNumber.text;
+                  var codeVer = verifyNumber.text;
+                  var date = DateTime.now();
 
-                CardModersStarbucks statement = CardModersStarbucks(
-                  cardNumber: cardNo,
-                  verifyCard: codeVer,
-                  date: date,
-                );
-                var provider =
-                    Provider.of<StartBucksProviders>(context, listen: false);
+                  CardModersStarbucks statement = CardModersStarbucks(
+                    cardNumber: cardNo,
+                    verifyCard: codeVer,
+                    date: date,
+                  );
+                  var provider =
+                      Provider.of<StartBucksProviders>(context, listen: false);
 
-                provider.addCardStarbucksList(statement);
-                Navigator.pop(context);
+                  provider.addCardStarbucksList(statement);
+                  Navigator.pop(context);
+                } else {}
                 // StartBucksProviders transectionProvider = StartBucksProviders();
                 //print(transectionProvider.cardStarbucksList.first);
               },
