@@ -56,6 +56,7 @@ class TextTranslations extends Translations {
           'providers': 'Providers',
           'place_key_card_number': 'Pleace Key Card Number',
           'place_key_card_verify': 'Pleace Verify Card Number',
+          'google': 'Google Map',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -111,6 +112,7 @@ class TextTranslations extends Translations {
           'providers': 'Providers',
           'place_key_card_number': 'กรุณาระบุหมายเลขบัตร',
           'place_key_card_verify': 'กรุณาระบุรหัสยืนยันบัตรของคุณ',
+          'google': 'แผนที่',
         }
       };
 }

@@ -49,6 +49,9 @@ dependencies:
   sembast: ^3.1.0+2
   path_provider: ^2.0.2
   path: ^1.8.0
+  flutter_map: ^0.13.1
+  #firebase_core: ^1.3.0
+  #firebase_database: ^7.1.1
   #End Packget Locate Database
   #multi_image_picker: ^4.8.0
   #image_picker: ^0.7.4

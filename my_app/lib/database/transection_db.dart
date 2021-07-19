@@ -72,4 +72,26 @@ class TransectionDB {
     }
     return transectionList;
   }
+
+  Future<List<Transections>> findData(String index) async {
+    var db = await this.openDatabase();
+    var store = intMapStoreFactory.store("expense");
+    var snapshotData = await store.find(
+      db,
+    );
+
+    // ignore: deprecated_member_use
+    List transectionList = List<Transections>();
+    for (var record in snapshotData) {
+      // Loop Data to list
+      transectionList.add(
+        Transections(
+          title: record["title"],
+          amount: record["amount"],
+          date: DateTime.parse(record["date"]),
+        ),
+      );
+    }
+    return transectionList;
+  }
 }

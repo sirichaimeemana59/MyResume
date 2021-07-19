@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/demo_ui/startbuckUI/mainButtonMenu.dart';
 import 'package:my_app/demo_ui/work_ui/home_ui.dart';
+import 'package:my_app/googleUI/google_map_home.dart';
 import 'package:my_app/pets/petList.dart';
 import 'package:my_app/screenproviders/mainscreen_providers.dart';
 import 'package:my_app/shop/shopList.dart';
@@ -84,6 +85,19 @@ class _MainMenuState extends State<MainMenu> {
     );
   }
 
+  Widget showListMenuGoogle() {
+    return ListTile(
+      leading: Icon(Icons.pets, size: 36.0, color: Colors.blue.shade600),
+      title: Text('Google Map'.tr),
+      onTap: () {
+        MaterialPageRoute materialPageRoute = MaterialPageRoute(
+            builder: (BuildContext context) => GoogleMapUIHome());
+        Navigator.of(context).push(materialPageRoute);
+        // Navigator.of(context).pop();
+      },
+    );
+  }
+
   Widget showName(String username) {
     return Text(
       'Name Customer : $username',
@@ -126,6 +140,7 @@ class _MainMenuState extends State<MainMenu> {
         showListMenuUI(),
         showListMenuUIStarbucks(),
         showListMenuProviders(),
+        showListMenuGoogle(),
       ],
     ));
   }

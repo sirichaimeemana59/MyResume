@@ -22,7 +22,7 @@ class _MainScreenProvidersState extends State<MainScreenProviders> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       // automaticallyImplyLeading: false,
+        // automaticallyImplyLeading: false,
         backgroundColor: Colors.blue,
         elevation: 0,
         actions: [
@@ -71,23 +71,46 @@ class _MainScreenProvidersState extends State<MainScreenProviders> {
                       index]; //เข้าถึงข้อมูล List จาก Model ทีละตัว
                   return Card(
                     margin: EdgeInsets.all(8),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.all(12),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                    child: Container(
+                      padding: EdgeInsets.all(12),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(data.title),
                               Text(data.amount.toString()),
                               Text(
                                 DateFormat("dd/MM/yyyy").format(data.date),
-                              ),
+                              )
                             ],
                           ),
-                        )
-                      ],
+                          Column(
+                            children: [
+                              ButtonBar(
+                                alignment: MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  FlatButton(
+                                    onPressed: () {
+                                      //print(index);
+                                      //getData(data.title.toString());
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          Icons.edit,
+                                          color: Colors.amber.shade900,
+                                        )
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }),

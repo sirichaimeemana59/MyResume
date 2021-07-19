@@ -1,5 +1,4 @@
 //import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:my_app/providers/transection/transection_providers.dart';
@@ -7,7 +6,14 @@ import 'package:my_app/screen/home.dart';
 import 'package:my_app/startbucksProviders/startBucksProvider.dart';
 import 'package:my_app/textTranslations.dart';
 import 'package:provider/provider.dart';
+import 'dart:io';
 //import 'package:flutter_openvpn/flutter_openvpn.dart';
+
+// Future<void> main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   final FirebaseApp app = await Firebase.initializeApp();
+//   runApp(Myapp());
+// }
 
 void main() {
   //HttpOverrides.global = new MyHttpOverrides();
