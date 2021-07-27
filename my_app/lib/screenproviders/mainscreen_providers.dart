@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:my_app/modelProviders/model_providers.dart';
 import 'package:my_app/providers/transection/transection_providers.dart';
 import 'package:my_app/screenproviders/formInsert_provider.dart';
+import 'package:my_app/screenproviders/formedit_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'package:get/get.dart';
 
 class MainScreenProviders extends StatefulWidget {
   @override
@@ -91,20 +93,86 @@ class _MainScreenProvidersState extends State<MainScreenProviders> {
                               ButtonBar(
                                 alignment: MainAxisAlignment.spaceEvenly,
                                 children: [
-                                  FlatButton(
-                                    onPressed: () {
-                                      //print(index);
-                                      //getData(data.title.toString());
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          Icons.edit,
-                                          color: Colors.amber.shade900,
-                                        )
-                                      ],
-                                    ),
-                                  )
+                                  Row(
+                                    children: [
+                                      FlatButton(
+                                        onPressed: () {
+                                          showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                AlertDialog(
+                                              title: Text('delete_confirm'.tr),
+                                              content:
+                                                  Text('delete_confirm'.tr),
+                                              actions: [
+                                                FlatButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          context, 'Cancel'),
+                                                  child: Text('cancel'.tr),
+                                                ),
+                                                FlatButton(
+                                                  onPressed: () {
+                                                    var provider = Provider.of<
+                                                            TransectionProvider>(
+                                                        context,
+                                                        listen: false);
+                                                    provider.deleteData(
+                                                        data.key_ID);
+                                                    Navigator.pop(context);
+                                                  },
+                                                  child: Text('ok'.tr),
+                                                ),
+                                              ],
+                                            ),
+                                          ).then((returnVal) {
+                                            if (returnVal != "Cancel") {
+                                              ScaffoldMessenger.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text('ok_confirm'.tr),
+                                                action: SnackBarAction(
+                                                    label: 'ok'.tr,
+                                                    onPressed: () {}),
+                                              ));
+                                            }
+                                          });
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Icon(
+                                              Icons.delete,
+                                              color: Colors.red.shade800,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      FlatButton(
+                                        onPressed: () {
+                                          // print(data.key_ID);
+                                          MaterialPageRoute materialPageRoute =
+                                              MaterialPageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          FormEditProviders());
+                                          Navigator.of(context)
+                                              .push(materialPageRoute);
+                                          // var provider =
+                                          //     Provider.of<TransectionProvider>(
+                                          //         context,
+                                          //         listen: false);
+                                          // provider.getData(data.key_ID);
+                                        },
+                                        child: Column(
+                                          children: [
+                                            Icon(
+                                              Icons.edit,
+                                              color: Colors.amber.shade900,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ],
                               ),
                             ],

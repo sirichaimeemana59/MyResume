@@ -1,10 +1,13 @@
 import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:my_app/modelProviders/model_providers.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sembast/sembast.dart';
 import 'package:sembast/sembast_io.dart';
+import 'dart:math';
 
 class TransectionDB {
   //บริการเกี่ยวกับฐานข้อมูล
@@ -34,10 +37,19 @@ class TransectionDB {
     var db = await this.openDatabase();
     var store = intMapStoreFactory.store("expense");
 
+    const _chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    Random _rnd = Random();
+
+    String getRandomString(int length) =>
+        String.fromCharCodes(Iterable.generate(
+            length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
+
     //Insert data format Json
     var keyID = store.add(
       db,
       {
+        "key_ID": getRandomString(10),
         "title": statement.title,
         "amount": statement.amount,
         "date": statement.date.toIso8601String(),
@@ -64,6 +76,7 @@ class TransectionDB {
       // Loop Data to list
       transectionList.add(
         Transections(
+          key_ID: record["key_ID"],
           title: record["title"],
           amount: record["amount"],
           date: DateTime.parse(record["date"]),
@@ -86,6 +99,7 @@ class TransectionDB {
       // Loop Data to list
       transectionList.add(
         Transections(
+          key_ID: record["key_ID"],
           title: record["title"],
           amount: record["amount"],
           date: DateTime.parse(record["date"]),
@@ -93,5 +107,41 @@ class TransectionDB {
       );
     }
     return transectionList;
+  }
+
+  Future<List<Transections>> getData(var key) async {
+    var db = await this.openDatabase();
+    var store = intMapStoreFactory.store("expense");
+    var snapshotData = await store.find(
+      db,
+      finder: Finder(filter: Filter.equals("key_ID", key), sortOrders: [
+        SortOrder(Field.key,
+            false), //เรียงข้อมูลจาก Key เรียงจากวันที่สร้างล่าสุดก่อนคือ False True คือ เรียงจากวันที่สร้างเก่าสุดก่อน
+      ]),
+    );
+    // ignore: deprecated_member_use
+    List transectionList = List<Transections>();
+    for (var record in snapshotData) {
+      // Loop Data to list
+      transectionList.add(
+        Transections(
+          key_ID: record["key_ID"],
+          title: record["title"],
+          amount: record["amount"],
+          date: DateTime.parse(record["date"]),
+        ),
+      );
+    }
+    //print(transectionList.length);
+    return transectionList;
+  }
+
+  Future<List<Transections>> deleteData(var key) async {
+    print(key);
+    var db = await this.openDatabase();
+    var store = intMapStoreFactory.store("expense");
+    var filter = Filter.equals('key_ID', key);
+    var finder = Finder(filter: filter);
+    await store.delete(db, finder: finder);
   }
 }

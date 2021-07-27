@@ -4,12 +4,18 @@ import 'package:my_app/providers/transection/transection_providers.dart';
 import 'package:provider/provider.dart';
 import 'package:get/get.dart';
 
-class FormInsertProviders extends StatefulWidget {
+class FormEditProviders extends StatefulWidget {
   @override
-  _FormInsertProvidersState createState() => _FormInsertProvidersState();
+  _FormEditProvidersState createState() => _FormEditProvidersState();
 }
 
-class _FormInsertProvidersState extends State<FormInsertProviders> {
+class _FormEditProvidersState extends State<FormEditProviders> {
+  void initState() {
+    // super.initState();
+    // Provider.of<TransectionProvider>(context, listen: false)
+    //     .getData("SHd5kFJ2lL");
+  }
+
   final formKey = GlobalKey<FormState>(); //Validate form
   final titleController = TextEditingController();
   final amountController = TextEditingController();
@@ -19,7 +25,7 @@ class _FormInsertProvidersState extends State<FormInsertProviders> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text('insert_pay'.tr),
+        title: Text('edit_pay'.tr),
         actions: [
           // registerButton(),
         ],

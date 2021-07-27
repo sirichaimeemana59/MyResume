@@ -57,6 +57,13 @@ class TextTranslations extends Translations {
           'place_key_card_number': 'Pleace Key Card Number',
           'place_key_card_verify': 'Pleace Verify Card Number',
           'google': 'Google Map',
+          'insert_pay': 'Add Data',
+          'edit_pay': 'Edit Data',
+          'delete_confirm': 'Confirm delete',
+          'calcel': 'Cancel',
+          'ok': 'OK',
+          'ok_confirm': 'Do you want confirm delete?',
+          'delete_success': 'Compleate',
         },
         'th': {
           'app_name': 'ศิริชัย',
@@ -113,6 +120,13 @@ class TextTranslations extends Translations {
           'place_key_card_number': 'กรุณาระบุหมายเลขบัตร',
           'place_key_card_verify': 'กรุณาระบุรหัสยืนยันบัตรของคุณ',
           'google': 'แผนที่',
+          'insert_pay': 'เพิ่มข้อมูล',
+          'edit_pay': 'แก้ไขข้อมูล',
+          'delete_confirm': 'ยืนยันการลบข้อมูล',
+          'calcel': 'ยกเลิก',
+          'ok': 'ตกลง',
+          'ok_confirm': 'คุณต้องต้องการยืนยันการลบข้อมูล',
+          'delete_success': 'ลบข้อมูลเรียบร้อยแล้ว',
         }
       };
 }
